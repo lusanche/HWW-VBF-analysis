@@ -7,14 +7,14 @@ using namespace std;
 
 void root_to_txt(){
   
-  //TString filenames[1]={"juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_vbf_m125v1_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_vbf_m125v1_alt_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_vbf_m125v2_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_vbf_m125v2_alt_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_ggf_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_ww_reduced.root"};//,
-  //TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_DYJetsToLL_M-10andTT_M-50_reduced.root"};//,
-  TString filenames[1]={"/home/juniorhiggs/1Ntuplas/Latinos/Full2016/samples/reduced/latino_top_reduced.root"};
+  //TString filenames[1]={"latino_vbf_m125v1_reduced.root"};//,
+  //TString filenames[1]={"latino_vbf_m125v1_alt_reduced.root"};//,
+  //TString filenames[1]={"latino_vbf_m125v2_reduced.root"};//,
+  //TString filenames[1]={"latino_vbf_m125v2_alt_reduced.root"};//,
+  //TString filenames[1]={"latino_ggf_reduced.root"};//,
+  //TString filenames[1]={"latino_ww_reduced.root"};//,
+  //TString filenames[1]={"latino_DYJetsToLL_M-10andTT_M-50_reduced.root"};//,
+  TString filenames[1]={"latino_top_reduced.root"};
   
   for (int i=0; i<1; i++) {
        TFile *samples=new TFile(filenames[i]);  
