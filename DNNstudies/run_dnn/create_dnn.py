@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+## about CMSSW in LXPLUS
+#import sys
+#sys.path.insert(0,"/afs/cern.ch/user/l/lusanche/.local/lib/python2.7/site-packages")
+
 ## Create first network with Keras
 from keras.models import Sequential
 from keras.layers import Dense
@@ -7,17 +11,16 @@ from keras.layers import Dropout
 from keras.constraints import maxnorm
 
 from keras.callbacks import ModelCheckpoint
-# Feature Extraction with Univariate Statistical Tests (Chi-squared for classification)
+
+## Feature Extraction with Univariate Statistical Tests (Chi-squared for classification)
 import pandas
 import numpy as np
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 
-# Weight and/or sample class
-#from sklearn.utils import sample_weight
-
-# Scatterplot Matrix
+## Scatterplot Matrix
 from pandas.tools.plotting import scatter_matrix
+
 ## MLP for dataset serialize to JSON/YAML and HDF5
 from keras.models import model_from_json
 #from keras.models import model_from_yaml
@@ -25,11 +28,14 @@ from keras.models import model_from_json
 from ROOT import *
 ROOT.gStyle.SetOptStat(0)
 from sklearn.metrics import roc_curve, auc
+#import matplotlib
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import random
 
 ## load dataset
-dataset_training=np.loadtxt("/home/juniorhiggs/1Ntuplas/Latinos/Full2016/KERAS/1.samples_txt/using_weights/sigXbkg_train.txt",delimiter=",")
+dataset_training=np.loadtxt("../data_txt/sigXbkg_train.txt",delimiter=",")
+#dataset_training=np.loadtxt("/afs/cern.ch/user/l/lusanche/Latinos/KERAS/data_txt/Full2016/sigXbkg_train.txt",delimiter=",")
 print(dataset_training.shape)
 
 ## split the attributes (columns) into input (X) and output (Y) variables...
@@ -40,17 +46,20 @@ W_training = abs(W_t)
 
 ## create model
 model = Sequential()
-model.add(Dense(150, input_dim=12, init='normal', activation='relu')) # input_dim : input neuron number
+model.add(Dense(72, input_dim=12, init='normal', activation='relu'))
+#model.add(Dense(72, input_dim=12, kernel_initializer='normal', activation='relu'))
+#model.add(Dropout(0.1))
+model.add(Dense(48, init='normal', activation='relu', W_constraint=maxnorm(1)))
+#model.add(Dense(48, kernel_initializer='normal', activation='relu', kernel_constraint=maxnorm(1)))
 model.add(Dropout(0.1))
-model.add(Dense(90, init='normal', activation='relu', W_constraint=maxnorm(1)))
-model.add(Dropout(0.1))
-model.add(Dense(60, init='normal', activation='relu', W_constraint=maxnorm(1)))
-model.add(Dropout(0.1))
-model.add(Dense(30, init='normal', activation='relu', W_constraint=maxnorm(1)))
-model.add(Dropout(0.1))
-model.add(Dense(12, init='normal', activation='relu', W_constraint=maxnorm(1)))
-model.add(Dropout(0.1))
+model.add(Dense(24, init='normal', activation='relu', W_constraint=maxnorm(1)))
+#model.add(Dense(24, kernel_initializer='normal', activation='relu', kernel_constraint=maxnorm(1)))
+#model.add(Dropout(0.1))
+model.add(Dense(4, init='normal', activation='relu', W_constraint=maxnorm(1)))
+#model.add(Dense(4, kernel_initializer='normal', activation='relu', kernel_constraint=maxnorm(1)))
+#model.add(Dropout(0.1))
 model.add(Dense(1, init='uniform', activation='sigmoid'))
+#model.add(Dense(1, kernel_initializer='uniform', activation='sigmoid'))
 
 ## Compile model (required to make predictions) ==> Logarithmic Loss Function: binary_crossentropy
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -71,7 +80,8 @@ np.random.seed(seed)
 np.random.shuffle(W_training)
 
 ## Fit the model
-history = model.fit(X_training, Y_training, batch_size=612, nb_epoch=300, verbose=2, validation_split=0.2, callbacks=callbacks_list, sample_weight=W_training)
+history = model.fit(X_training, Y_training, batch_size=50, nb_epoch=500, verbose=2, validation_split=0.2, callbacks=callbacks_list, sample_weight=W_training)
+#history = model.fit(X_training, Y_training, batch_size=50, epochs=500, verbose=2, validation_split=0.2, callbacks=callbacks_list, sample_weight=W_training)
 ## Evaluate the model
 scores = model.evaluate(X_training, Y_training, verbose=0)
 
@@ -100,7 +110,8 @@ loaded_model.load_weights("model1_weights_json.h5")
 #loaded_model.load_weights("model1_weights_yaml.h5")
 
 ## dataset test
-dataset_testing = np.loadtxt("/home/juniorhiggs/1Ntuplas/Latinos/Full2016/KERAS/1.samples_txt/using_weights/sigXbkg_test.txt", delimiter=",")
+dataset_testing = np.loadtxt("../data_txt/sigXbkg_test.txt", delimiter=",")
+#dataset_testing = np.loadtxt("/afs/cern.ch/user/l/lusanche/Latinos/KERAS/data_txt/Full2016/sigXbkg_test.txt", delimiter=",")
 
 ## split the attributes (columns) into input (X) and output (Y) variables...
 X_testing = dataset_testing[:,0:12] #  columns
