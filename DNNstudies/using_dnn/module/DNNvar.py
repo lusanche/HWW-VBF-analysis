@@ -79,8 +79,6 @@ class DNNvarFiller(TreeCloner):
             if i > 0 and i%step == 0.:
                 print i,'events processed.'
 
-#            DNNvar[0] = -9999.
-            
             self.var[0]   =  itree.DNNvar
             DNNvar[0] = self.getDNNvar.Evaluate("DNN")
              
