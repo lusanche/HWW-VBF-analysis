@@ -21,8 +21,8 @@ seed = 7
 numpy.random.seed(seed)
 
 #loads the model
-smodel = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model1.json"
-sweight = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model1_weights_json.h5"
+smodel = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model.json"
+sweight = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model_weights_json.h5"
 json_file = open(smodel,'r')
 loaded_model_json = json_file.read()
 json_file.close()
