@@ -87,27 +87,27 @@ scores = model.evaluate(X_training, Y_training, verbose=0)
 
 ## serialize model to JSON/YAML
 model_json = model.to_json()
-with open("model1.json", "w") as json_file:
+with open("model.json", "w") as json_file:
     json_file.write(model_json)
 #model_yaml = model.to_yaml()
-#with open("model1.yaml", "w") as yaml_file:
+#with open("model.yaml", "w") as yaml_file:
 #    yaml_file.write(model_yaml)
 ## serialize weights to HDF5
-model.save_weights("model1_weights_json.h5")
-#model.save_weights("model1_weights_yaml.h5")
+model.save_weights("model_weights_json.h5")
+#model.save_weights("model_weights_yaml.h5")
 
 ## load JSON/YAML and create model
-json_file = open('model1.json', 'r')
+json_file = open('model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-#yaml_file = open('model1.yaml', 'r')
+#yaml_file = open('model.yaml', 'r')
 #loaded_model_yaml = yaml_file.read()
 #yaml_file.close()
 #loaded_model = model_from_yaml(loaded_model_yaml)
 ## load weights into new model
-loaded_model.load_weights("model1_weights_json.h5")
-#loaded_model.load_weights("model1_weights_yaml.h5")
+loaded_model.load_weights("model_weights_json.h5")
+#loaded_model.load_weights("model_weights_yaml.h5")
 
 ## dataset test
 dataset_testing = np.loadtxt("../data_txt/sigXbkg_test.txt", delimiter=",")
