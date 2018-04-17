@@ -1,78 +1,70 @@
+#
+#     ___ \       \   |     \   |
+#     |    |    |\ \  |   |\ \  |                          _)         |      | 
+#     |    |    | \ \ |   | \ \ |      \ \   /  _` |   __|  |   _` |  __ \   |   _ \ 
+#     |    |    |  \  |   |  \  |       \ \ /  (   |  |     |  (   |  |   |  |   __/
+#    _____/    _|   \_|  _|   \_|        \_/  \__,_| _|    _| \__,_| _.__/  _| \___|
+#
+
 #!/usr/bin/env python
 
 from LatinoAnalysis.Gardener.gardening import TreeCloner
-import numpy
-import ROOT
-from ROOT import TMVA, TFile, TString
-import sys
+
 import optparse
+import os
+import sys
+import ROOT import *
+import numpy
+import array
 import re
 import warnings
-import os
 import os.path
-import array
 from math import *
 import math
-import keras
+
+from keras.models import Sequential
+from keras.models import model_from_json
+from keras.layers import Dense, Dropout, Activation
+from keras.layers.advanced_activations import LeakyReLU, PReLU
+from keras.optimizers import SGD, Adam, RMSprop, Adagrad, Adadelta, Adamax, Nadam
+from keras.utils import np_utils
 
 class DNNvarFiller(TreeCloner):
     def __init__(self):
        pass
 
-    def createDNNvarMVA(self):
-        self.getDNNvarMVAV = ROOT.TMVA.Reader();
-        ## the order is important for TMVA!
-        self.getDNNvarMVAV.AddVariable("DNNvar", (self.var1))
-        ## I need to declare the spectator ... for some strange ROOT reasons ...
-        #self.getMuccaMVAV.AddSpectator("std_vector_jet_pt[0]",   (self.var17))
-        ## mva trainined xml
-        #baseCMSSW = os.getenv('CMSSW_BASE')
-        #self.getMuccaMVAV.BookMVA("BDT",baseCMSSW+"/src/LatinoAnalysis/Gardener/python/data/mucca/TMVAClassification_BDTG.weights.bkg" + self.kind + ".xml")
-        self.getDNNvarMVAV.BookMVA("PyKeras","/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/Full2016/using_weights/model1.json")
+#    def createDNNvar(self):
+#        self.AddVariable("DNNvar", (self.var))
+#        
+#        ## DNN trained json.bkg" + self.kind + ".xml")
+#        self.Keras("DNN","/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/Full2016/using_weights/model.json")
 
     def help(self):
         return '''Add DNN variable'''
 
     def addOptions(self,parser):
-        description = self.help()
-        group = optparse.OptionGroup(parser,self.label, description)
-        group.add_option('-k', '--kind',   dest='kind', help='Which background training to be used', default='1')
-        group.add_option('-s', '--signal', dest='signal', help='Signal model', default='VBF')
-        parser.add_option_group(group)
-        return group
         pass
 
-
     def checkOptions(self,opts):
-        if not (hasattr(opts,'kind')):
-            raise RuntimeError('Missing parameter')
-        self.kind      = opts.kind
-        print " kind   = ", self.kind
-        self.signal    = opts.signal
-        print " signal = ", self.signal
-
+        pass
 
     def process(self,**kwargs):
-
-        self.getDNNvarMVAV = None
-
-        self.var1  = array.array('d',[0])
-        #self.var17 = array.array('f',[0])
-        
+#        self.getDNNvar = None
+#        self.var  = array.array('d',[0]))
         tree  = kwargs['tree']
         input = kwargs['input']
         output = kwargs['output']
 
+        # does that work so easily and give new variable itree and otree?
         self.connect(tree,input)
-        newbranches = ['dnnmva'+ self.kind]
-
+        newbranches = ['dnnvar']
         self.clone(output,newbranches)
 
-        dnnmva   = numpy.ones(1, dtype=numpy.double)
+        dnnvar   = numpy.ones(1, dtype=numpy.double)
 
-        self.otree.Branch('dnnmva'+ self.kind,  dnnmva,  'dnnmva' + self.kind + '/D')
+        self.otree.Branch('dnnvar',  dnnvar,  'dnnvar/D')
 
-        self.createDNNvarMVA()
+#        self.createDNNvar()
 
         nentries = self.itree.GetEntries()
         print 'Total number of entries: ',nentries 
@@ -81,6 +73,10 @@ class DNNvarFiller(TreeCloner):
         itree     = self.itree
         otree     = self.otree
 
+#        # change this part into correct path structure... 
+#        cmssw_base = os.getenv('CMSSW_BASE')
+#        ROOT.gROOT.LoadMacro(cmssw_base+'/src/LatinoAnalysis/Gardener/python/variables/DMVar.C+g')
+#----------------------------------------------------------------------------------------------------  
 
         print '- Starting eventloop'
         step = 5000
@@ -91,19 +87,16 @@ class DNNvarFiller(TreeCloner):
             if i > 0 and i%step == 0.:
                 print i,'events processed.'
 
-            dnnmva[0] = -9999.
+#            dnnvar[0] = -9999.
             
             # just because it is easier to write later ...
             pt1 = itree.std_vector_lepton_pt[0]
             pt2 = itree.std_vector_lepton_pt[1]
             
-            if pt1>0 and pt2>0 : 
-
-              self.var1[0]   =  itree.DNNvar
-              #self.var17[0]  =  itree.std_vector_jet_pt[0]
-              
-              dnnmva[0] = self.getDNNvarMVAV.EvaluateMVA("DNN")
-              
+#            if pt1>0 and pt2>0 : 
+#              self.var[0]   =  itree.DNNvar
+#              dnnvar[0] = self.getDNNvar.Evaluate("DNN")
+             
             otree.Fill()
             
         self.disconnect()
