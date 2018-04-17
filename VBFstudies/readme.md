@@ -1,1 +1,136 @@
 
+Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
+Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
+
+Access to the github repository Latinos: https://github.com/latinos
+To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
+Added to the LatinoPlotTools team for the latinos organization: https://github.com/orgs/latinos/teams/latinoplottools
+
+### Starting to configure the VBF analysis: Setup Latinos framework
+
+https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test
+
+$ ssh -Y lxplus.cern.ch                     %access your lxplus account: 
+$ bash -l                                   %login shell (after edit ".bash_profile, etc...")
+
+Build the work area:
+Exactly the same as for CVS (use version 4_2_8 for 7TeV analyses and 5_3_9 for 8TeV and 7_X_Y for 13TeV)
+$ export SCRAM_ARCH=slc6_amd64_gcc530       %scram list CMSSW (see installed projects available for platform >> slc6_amd64_gcc530 <<)
+$ cmsrel CMSSW_8_0_26_patch1                        %building work area (area => release CMSSW_8_0_26_patch1)
+
+Setup your runtime environment :
+$ cd CMSSW_8_0_26_patch1/src/                       
+$ cmsenv                                    % (or eval `scramv1 runtime -sh`) setup the runtime variable environment every time you start work in your project area.
+
+Set up GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
+Get the material:
+$ git cms-init                              %initialize git locally
+                                            %This has to be done before anything is added to the src directory or it complains.
+$ git clone --branch 13TeV git@github.com:latinos/setup.git LatinosSetup
+                                            %clonnig the repo 'setup' of latinos github calling it 'LatinosSetup'
+$ source LatinosSetup/Setup.sh              %setup Setup.sh by sourcing (or bash)
+                                            %source: used to load any functions file into the current shell script or a command prompt.
+
+Clonning more repos:
+$ cd LatinoAnalysis/ShapeAnalysis/
+$ git clone git@github.com:latinos/PlotsConfigurations.git %clonnig the repo 'PlotsConfigurations' of latinos github
+
+$ cmsenv
+$ scramv1 b                                 %compile (or scramv1 b -j 10)
+
+## VBF analysis:
+
+$ cd PlotsConfigurations/Configurations/VBF/
+
+
+=====================================================================================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1. First time only 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
+
+cd $COMBINE_DIRECTORY
+
+Get Andrea's scripts to modify datacards.
+
+cd $COMBINE_DIRECTORY
+git clone https://github.com/amassiro/ModificationDatacards
+
+Copy and edit the latino user configuration file.
+
+cd $CMSSW_DIRECTORY/LatinoAnalysis/Tools/python
+cp userConfig_TEMPLATE.py userConfig.py
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+look at samples.py
+Full2016]$ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2. Produce histograms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This step reads the post-processed latino trees and produces histograms for several variables and phase spaces.
+
+$$$$$$$$$$$$$$$$$$$ cd Full2016/
+
+The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file),
+
+$$$$$$$$$$$$$$$$$$$ mkShapes.py             --pycfg=configuration.py             --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel             --batchSplit=AsMuchAsPossible            --doBatch=True            --batchQueue=2nd
+
+The jobs can take a while, thus it is natural to check their status.
+
+$$$$$$$$$$$$$$$$$$$ mkBatch.py         -s
+
+After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (tag is specified in configuration.py):
+
+$$$$$$$$$$$$$$$$$$$ ls -l jobs/mkShapes__VBF/*.jid
+    
+If you find .jid files it means that the corresponding jobs failed, check the .err and .out files to understand the reason of the failure.
+
+If a job takes too long / fails, one can kill it and resubmit manually, e.g.:
+
+$$$$$$$$$$$$$$$$$$$ bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Vg.sh
+$$$$$$$$$$$$$$$$$$$ bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Fake9.sh
+
+If several jobs failed and you want to resubmit them all at once you can do:
+
+$$$$$$$$$$$$$$$$$$$ cd jobs/mkShapes__VBF
+$$$$$$$$$$$$$$$$$$$ for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+3. Put all your apples in one basket
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Once the previous jobs have finished we hadd the outputs.
+
+$$$$$$$$$$$$$$$$$$$ mkShapes.py            --pycfg=configuration.py             --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel             --batchSplit=AsMuchAsPossible             --doHadd=True
+
+NB: If the --batchSplit=AsMuchAsPossible option is used, do not hadd the outputs by hand but use the command above instead.
+    Otherwise the MC statistical uncertainties are not treated in the correct way.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+4. Read histograms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+At this stage one can either produce plots or datacards.
+Produce plots
+
+Now we are ready to make data/MC comparison plots.
+
+$$$$$$$$$$$$$$$$$$$ mkPlot.py              --inputFile=rootFile/plots_VBF.root           --showIntegralLegend=1
+
+Produce datacards
+
+$$$$$$$$$$$$$$$$$$$ mkDatacards.py             --pycfg=configuration.py          --inputFile=rootFile/plots_VBF.root
+
+To move or copy the plots to the web,
+
+$ mkdir $HOME/www/*/new_directory
+$ pushd $HOME/www/*/new_directory
+$ wget https://raw.githubusercontent.com/latinos/PlotsConfigurations/master/index.php
+$ popd
+$ cp plotVBF/*png $HOME/www/new_directory/
+
+Time to check and share the results: https://lusanche.web.cern.ch/lusanche/*/new_directory/
