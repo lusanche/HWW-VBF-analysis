@@ -55,9 +55,6 @@ class DNNvarFiller(TreeCloner):
     def createDNNvar(self):
         self.AddVariable("DNNvar", (self.var))
         
-#        ## DNN training json
-#        self.Keras("DNN","/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/Full2016/using_weights/model.json")
-
     def help(self):
         return '''Add DNN variable'''
 
@@ -88,13 +85,32 @@ class DNNvarFiller(TreeCloner):
         self.otree.Branch('DNNvar',  DNNvar,  'DNNvar/D')
 
         self.createDNNvar()
-
+        
         nentries = self.itree.GetEntries()
-        print 'Total number of entries: ',nentries 
-
+        print 'Total number of entries: ',nentries
+        
         # avoid dots to go faster
         itree     = self.itree
         otree     = self.otree
+
+        X_test = [[0 for i in range(12)] for j in range(nentries)]
+        ientry = 0
+        for i in itree:
+            X_test[ientry][0] = i.std_vector_lepton_pt[0]
+            X_test[ientry][1] = i.std_vector_lepton_eta[0]
+            X_test[ientry][2] = i.std_vector_lepton_phi[0]
+            X_test[ientry][3] = i.std_vector_lepton_pt[1]
+            X_test[ientry][4] = i.std_vector_lepton_eta[1]
+            X_test[ientry][5] = i.std_vector_lepton_phi[1]
+            X_test[ientry][6] = i.std_vector_jet_pt[0]
+            X_test[ientry][7] = i.std_vector_jet_eta[0]
+            X_test[ientry][8] = i.std_vector_jet_phi[0]
+            X_test[ientry][9] = i.std_vector_jet_pt[1]
+            X_test[ientry][10] = i.std_vector_jet_eta[1]
+            X_test[ientry][11] = i.std_vector_jet_phi[1]
+            ientry = ientry + 1
+        
+        Y_pred  = loaded_model.predict(X_test)
 
         print '- Starting eventloop'
         step = 5000
@@ -106,9 +122,11 @@ class DNNvarFiller(TreeCloner):
                 print i,'events processed.'
 
             self.var[0]   =  itree.DNNvar
-            DNNvar[0] = self.getDNNvar.Evaluate("DNN")
+            DNNvar[0] = self.getDNNvar.Y_pred[i][0]
              
             otree.Fill()
             
-self.disconnect()
+        otree.Write()
+            
+        self.disconnect()
         print '- Eventloop completed'
