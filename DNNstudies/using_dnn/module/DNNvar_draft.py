@@ -7,7 +7,7 @@ import os
 import sys
 import ROOT import *
 import numpy
-import array
+import array from array
 import re
 import warnings
 import os.path
@@ -22,6 +22,32 @@ import math
 #    _____/    _|   \_|  _|   \_|        \_/  \__,_| _|    _| \__,_| _.__/  _| \___|
 #
 
+#For test model
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.layers.advanced_activations import LeakyReLU, PReLU
+from keras.optimizers import SGD, Adam, RMSprop, Adagrad, Adadelta, Adamax, Nadam
+from keras.utils import np_utils
+from keras.models import model_from_json
+
+# fix random seed for reproducibility
+seed = 7
+numpy.random.seed(seed)
+
+#loads the model
+smodel = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model.json"
+sweight = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model_weights_json.h5"
+json_file = open(smodel,'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(loaded_model_json)
+loaded_model.load_weights(sweight)
+
+opt = Adamax();
+
+#compile the model
+loaded_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['acc'])
+
 class DNNvarFiller(TreeCloner):
     def __init__(self):
        pass
@@ -29,8 +55,8 @@ class DNNvarFiller(TreeCloner):
     def createDNNvar(self):
         self.AddVariable("DNNvar", (self.var))
         
-        ## DNN training json
-        self.Keras("DNN","/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/Full2016/using_weights/model.json")
+#        ## DNN training json
+#        self.Keras("DNN","/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/Full2016/using_weights/model.json")
 
     def help(self):
         return '''Add DNN variable'''
@@ -57,9 +83,9 @@ class DNNvarFiller(TreeCloner):
         
         self.clone(output,newbranches)
 
-        DNNvar   = numpy.ones(1, dtype=numpy.double)
+        DNNvar   = numpy.ones(1, dtype=numpy.float)
 
-        self.otree.Branch('dnnvar',  dnnvar,  'dnnvar/D')
+        self.otree.Branch('DNNvar',  DNNvar,  'DNNvar/D')
 
         self.createDNNvar()
 
