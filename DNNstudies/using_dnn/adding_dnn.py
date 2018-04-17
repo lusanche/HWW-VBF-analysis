@@ -12,18 +12,17 @@ import numpy, math
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.layers.advanced_activations import LeakyReLU, PReLU
-from keras.optimizers import SGD, Adam
+from keras.optimizers import SGD, Adam, RMSprop, Adagrad, Adadelta, Adamax, Nadam
 from keras.utils import np_utils
 from keras.models import model_from_json
-from keras.optimizers import SGD, Adam, RMSprop, Adagrad, Adadelta, Adamax, Nadam
 
 # fix random seed for reproducibility
 seed = 7
 numpy.random.seed(seed)
 
-#loads the model for vbf vs top
-smodel = "/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/model1.json"
-sweight = "/afs/cern.ch/user/l/lusanche/Latinos/KERAS/run_dnn/model1_weights_json.h5"
+#loads the model
+smodel = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model1.json"
+sweight = "/afs/cern.ch/user/l/lusanche/KERAS/run_dnn/model1_weights_json.h5"
 json_file = open(smodel,'r')
 loaded_model_json = json_file.read()
 json_file.close()
@@ -32,7 +31,7 @@ loaded_model.load_weights(sweight)
 
 opt = Adamax();
 
-#compile the model for vbf vs top
+#compile the model
 loaded_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['acc'])
 
 paths = ["~/eosuser/user/l/lusanche/samples/reduced/"
@@ -41,7 +40,7 @@ paths = ["~/eosuser/user/l/lusanche/samples/reduced/"
 files = [    "latino_vbf_m125v1_alt_reduced",
              "latino_ggf_reduced",
              "latino_ww_reduced",
-             "latino_DYJetsToLL_M-10andTT_M-50_reduced",
+             "latino_DYJetsToLL_reduced",
              "latino_top_reduced",
 ]
 
