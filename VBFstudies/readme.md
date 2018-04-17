@@ -1,9 +1,12 @@
 
 Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
+
 Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
 
 Access to the github repository Latinos: https://github.com/latinos
+
 To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
+
 Added to the LatinoPlotTools team for the latinos organization: https://github.com/orgs/latinos/teams/latinoplottools
 
 ### Starting to configure the VBF analysis: Setup Latinos framework
