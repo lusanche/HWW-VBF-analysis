@@ -3,9 +3,9 @@ from LatinoAnalysis.Gardener.gardening import TreeCloner
 import optparse
 import os
 import sys
-import ROOT import *
+from ROOT import *
 import numpy
-import array from array
+from array
 import re
 import warnings
 import os.path
