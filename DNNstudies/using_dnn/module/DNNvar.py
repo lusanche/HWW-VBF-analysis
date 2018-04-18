@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from LatinoAnalysis.Gardener.gardening import TreeCloner
 
 import optparse
