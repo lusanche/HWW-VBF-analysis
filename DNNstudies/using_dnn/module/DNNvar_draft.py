@@ -122,7 +122,7 @@ class DNNvarFiller(TreeCloner):
                 print i,'events processed.'
 
             self.var[0]   =  itree.DNNvar
-            DNNvar[0] = self.getDNNvar.Y_pred[i][0]
+            DNNvar[0] = self.Y_pred[i][0]
              
             otree.Fill()
             
