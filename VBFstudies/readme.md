@@ -11,9 +11,7 @@
 ### 1. Setup Latinos framework
 
 - Access your lxplus account:
-```
-ssh -Y username@lxplus.cern.ch
-```
+```ssh -Y username@lxplus.cern.ch```
 - Login shell
 ```
 bash -l
