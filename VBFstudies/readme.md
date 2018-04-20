@@ -11,22 +11,22 @@
 ### 1. Setup Latinos framework
 
 - Access your lxplus account:
-```bash
+```
 ssh -Y username@lxplus.cern.ch
 ```
 - Login shell
-```bash
+```
 bash -l
 ```
 #### 1.1 Build the work area:
 - See installed projects available for platform and build work area
-```bash
+```
 scram list CMSSW
 export SCRAM_ARCH=slc6_amd64_gcc530
 cmsrel CMSSW_8_0_26_patch1
 ```
 - setup the runtime variable environment every time you start work in your project area
-```bash
+```
 cd CMSSW_8_0_26_patch1/src/
 cmsenv
 ```
