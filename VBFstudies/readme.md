@@ -8,7 +8,7 @@
 
 * Access to the github repository Latinos: https://github.com/latinos
 
-### [1. Setup Latinos framework](https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test)
+### 1. Setup Latinos framework
 
 - Access your lxplus account:
 ```bash
@@ -19,18 +19,18 @@ ssh -Y username@lxplus.cern.ch
 bash -l
 ```
 #### 1.1 Build the work area:
-See installed projects available for platform and build work area
+- See installed projects available for platform and build work area
 ```bash
 scram list CMSSW
 export SCRAM_ARCH=slc6_amd64_gcc530
 cmsrel CMSSW_8_0_26_patch1
 ```
-
-### Setup your runtime environment :
-
-$ cd CMSSW_8_0_26_patch1/src/                       
-
-$ cmsenv                                    % (or eval `scramv1 runtime -sh`) setup the runtime variable environment every time you start work in your project area.
+- Your runtime environment:
+```bash
+cd CMSSW_8_0_26_patch1/src/
+cmsenv
+```
+or eval `scramv1 runtime -sh` 
 
 ### Set up GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
 
