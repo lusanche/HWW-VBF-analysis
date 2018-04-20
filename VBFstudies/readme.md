@@ -45,49 +45,44 @@ source LatinosSetup/Setup.sh
 ## 2. VBF analysis: Plots configuration for mkShapes, mkPlot, mkDatacards
 ```
 cd LatinoAnalysis/ShapeAnalysis/
-git clone git@github.com:latinos/PlotsConfigurations.git %clonnig the repo 'PlotsConfigurations' of latinos github
+git clone git@github.com:latinos/PlotsConfigurations.git
 cmsenv
 ```
 Compile ```$ scramv1 b``` or ```scramv1 b -j 10```
 ```
 cd PlotsConfigurations/Configurations/VBF/
 ```
-look at files and modify them according to the interest.
+look at files and modify them according to the interest. 
+```
+easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
+```
 
 #### 2.1. Produce histograms:
 
-Full2016]$ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
+- The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file)
+```
+mkShapes.py     --pycfg=configuration.py  \
+                --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel  \
+                --batchSplit=AsMuchAsPossible            --doBatch=True            --batchQueue=2nd
+```
+- The jobs can take a while, thus it is natural to check their status: ```mkBatch.py         -s```
 
+- After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (tag is specified in configuration.py):
+```
+ls -l jobs/mkShapes__VBF/*.jid
+```
+- If you find .jid files it means that the corresponding jobs failed, check the .err and .out files to understand the reason of the failure.
 
-This step reads the post-processed latino trees and produces histograms for several variables and phase spaces.
-
-$$$$$$$$$$$$$$$$$$$ cd Full2016/
-
-The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file),
-
-$$$$$$$$$$$$$$$$$$$ mkShapes.py             --pycfg=configuration.py             --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel             --batchSplit=AsMuchAsPossible            --doBatch=True            --batchQueue=2nd
-
-The jobs can take a while, thus it is natural to check their status.
-
-$$$$$$$$$$$$$$$$$$$ mkBatch.py         -s
-
-After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (tag is specified in configuration.py):
-
-$$$$$$$$$$$$$$$$$$$ ls -l jobs/mkShapes__VBF/*.jid
-    
-If you find .jid files it means that the corresponding jobs failed, check the .err and .out files to understand the reason of the failure.
-
-If a job takes too long / fails, one can kill it and resubmit manually, e.g.:
-
-$$$$$$$$$$$$$$$$$$$ bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Vg.sh
-
-$$$$$$$$$$$$$$$$$$$ bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Fake9.sh
-
-If several jobs failed and you want to resubmit them all at once you can do:
-
-$$$$$$$$$$$$$$$$$$$ cd jobs/mkShapes__VBF
-
-$$$$$$$$$$$$$$$$$$$ for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
+- If a job takes too long/fails, one can [kill](https://twiki.cern.ch/twiki/bin/view/Main/BatchJobs#JobKill) it and resubmit manually, e.g.:
+```
+bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Vg.sh
+bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Fake9.sh
+```
+- If several jobs failed and you want to resubmit them all at once you can do:
+```
+cd jobs/mkShapes__VBF
+for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
+```
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Put all your apples in one basket
