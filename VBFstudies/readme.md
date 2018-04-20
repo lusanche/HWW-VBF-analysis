@@ -2,13 +2,13 @@
 
 * Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
 
-*To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
+* To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
 
-Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
+* Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
 
-Access to the github repository Latinos: https://github.com/latinos
+* Access to the github repository Latinos: https://github.com/latinos
 
-### Starting to configure the VBF analysis: Setup Latinos framework
+#### Starting to configure the VBF analysis: Setup Latinos framework
 
 https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test
 
