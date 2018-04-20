@@ -8,9 +8,9 @@
 
 * Access to the github repository Latinos: https://github.com/latinos
 
-### [Setup Latinos framework](https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test)
+### [Starting Setup Latinos framework](https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test)
 
-$ ssh -Y lxplus.cern.ch                     %access your lxplus account:
+$ ssh -Y lxplus.cern.ch                     %access your lxplus account:<br>
 
 $ bash -l                                   %login shell (after edit ".bash_profile, etc...")
 
