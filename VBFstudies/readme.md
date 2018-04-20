@@ -10,17 +10,21 @@
 
 ### [1. Setup Latinos framework](https://github.com/latinos/LatinoTrees/tree/master/AnalysisStep/test)
 
-$ ssh -Y lxplus.cern.ch                     %access your lxplus account:<br>
-
-$ bash -l                                   %login shell (after edit ".bash_profile, etc...")
-
-Build the work area:
-
-Exactly the same as for CVS (use version 4_2_8 for 7TeV analyses and 5_3_9 for 8TeV and 7_X_Y for 13TeV)
-
-$ export SCRAM_ARCH=slc6_amd64_gcc530    %scram list CMSSW (see installed projects available for platform >> slc6_amd64_gcc530 <<)
-
-$ cmsrel CMSSW_8_0_26_patch1                        %building work area (area => release CMSSW_8_0_26_patch1)
+- Access your lxplus account:
+```bash
+ssh -Y username@lxplus.cern.ch
+```
+- Login shell
+```bash
+bash -l
+```
+#### 1.1 Build the work area:
+See installed projects available for platform and build work area
+```bash
+scram list CMSSW
+export SCRAM_ARCH=slc6_amd64_gcc530
+cmsrel CMSSW_8_0_26_patch1
+```
 
 ### Setup your runtime environment :
 
