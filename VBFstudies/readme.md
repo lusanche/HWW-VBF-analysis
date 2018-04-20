@@ -84,51 +84,60 @@ cd jobs/mkShapes__VBF
 for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
 ```
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-3. Put all your apples in one basket
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+- Once the previous jobs have finished we hadd the outputs, put all your apples in one basket
+```
+mkShapes.py      --pycfg=configuration.py   \
+                 --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel   \
+                 --batchSplit=AsMuchAsPossible             --doHadd=True
+```
+NB: If the ```--batchSplit=AsMuchAsPossible``` option is used, do not hadd the outputs by hand but use the command above instead.    Otherwise the MC statistical uncertainties are not treated in the correct way.
 
-Once the previous jobs have finished we hadd the outputs.
-
-$$$$$$$$$$$$$$$$$$$ mkShapes.py            --pycfg=configuration.py             --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel             --batchSplit=AsMuchAsPossible             --doHadd=True
-
-NB: If the --batchSplit=AsMuchAsPossible option is used, do not hadd the outputs by hand but use the command above instead.
-    Otherwise the MC statistical uncertainties are not treated in the correct way.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-4. Read histograms
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#### 2.2.  Read histograms
 
 At this stage one can either produce plots or datacards.
-Produce plots
 
-Now we are ready to make data/MC comparison plots.
+- Produce plots: Now we are ready to make data/MC comparison plots.
+```
+mkPlot.py              --inputFile=rootFile/plots_VBF.root           --showIntegralLegend=1
+```
+- Produce datacards
+```
+mkDatacards.py             --pycfg=configuration.py          --inputFile=rootFile/plots_VBF.root
+```
+## 3. To move or copy the plots to the web,
+```
+mkdir $HOME/www/*/new_directory
+pushd $HOME/www/*/new_directory
+wget https://raw.githubusercontent.com/latinos/PlotsConfigurations/master/index.php
+popd
+cp plotVBF/*png $HOME/www/new_directory/
+```
+Time to check and share the results: `https://lusanche.web.cern.ch/lusanche/*/new_directory/`
 
-$$$$$$$$$$$$$$$$$$$ mkPlot.py              --inputFile=rootFile/plots_VBF.root           --showIntegralLegend=1
+## 4. Play with datacards:
 
-Produce datacards
+- https://github.com/latinos/PlayWithDatacards
+- [CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)
+- Transform datacard in to table
+```
+./tableFromCards.py  hww-12.9.mH125_of2jvbf_dnn0.3.txt
+```
+https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py
+```
+python   scripts/prepareTables2.py
+python   scripts/prepareTables2.py  |  /bin/sh
+python   systematicsAnalyzer.py   \
+         /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_0_5/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/datacards/hww2l2v_13TeV_of2jvbf/mll/datacard.txt   \
+         --all       -m      125     -f    tex         >      hww-12.9.mH125_of2jvbf_dnn0.3.tex
+```
+you need to install the Higgs combine package (ROOT6 SLC6 release CMSSW_7_4_X)
 
-$$$$$$$$$$$$$$$$$$$ mkDatacards.py             --pycfg=configuration.py          --inputFile=rootFile/plots_VBF.root
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit
 
-To move or copy the plots to the web,
+to better debug, try to have only 1 signal sample, 1 background sample and data.
 
-$ mkdir $HOME/www/*/new_directory
+From the error (that is a "combine" error) it seems you did not run on data.
 
-$ pushd $HOME/www/*/new_directory
-
-$ wget https://raw.githubusercontent.com/latinos/PlotsConfigurations/master/index.php
-
-$ popd
-
-$ cp plotVBF/*png $HOME/www/new_directory/
-
-Time to check and share the results: https://lusanche.web.cern.ch/lusanche/*/new_directory/
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-1. First time only 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
 
