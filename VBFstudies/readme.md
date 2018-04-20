@@ -30,7 +30,7 @@ cmsrel CMSSW_8_0_26_patch1
 cd CMSSW_8_0_26_patch1/src/
 cmsenv
 ```
-or eval `scramv1 runtime -sh` 
+or ```eval `scramv1 runtime -sh` ```
 
 #### 1.2 Setup GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
 
