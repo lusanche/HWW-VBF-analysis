@@ -1,8 +1,8 @@
 #### Some useful links:
 
-Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
+* Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
 
-To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
+*To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
 
 Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
 
