@@ -25,14 +25,14 @@ scram list CMSSW
 export SCRAM_ARCH=slc6_amd64_gcc530
 cmsrel CMSSW_8_0_26_patch1
 ```
-- Your runtime environment:
+- setup the runtime variable environment every time you start work in your project area
 ```bash
 cd CMSSW_8_0_26_patch1/src/
 cmsenv
 ```
 or eval `scramv1 runtime -sh` 
 
-### Set up GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
+#### 1.2 Setup GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
 
 Get the material:
 
