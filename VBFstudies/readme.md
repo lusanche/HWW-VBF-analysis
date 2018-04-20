@@ -11,12 +11,12 @@
 ### 1. Setup Latinos framework
 
 - Access your lxplus account: ```ssh -Y username@lxplus.cern.ch```
-- Login shell ```bash -l```
+- Login shell: ```bash -l```
 
 #### 1.1 Build the work area:
 - See installed projects available for platform and build work area
-
-```scram list CMSSW
+```
+scram list CMSSW
 export SCRAM_ARCH=slc6_amd64_gcc530
 cmsrel CMSSW_8_0_26_patch1
 ```
@@ -27,15 +27,20 @@ cmsenv
 ```
 or ```eval `scramv1 runtime -sh` ```
 
-#### 1.2 Setup GitHub:CMSSW code that you will need to access is maintained in a GitHub repository.
+#### 1.2 Setup github repository:
 
-Get the material:
-
-$ git cms-init                              %initialize git locally
-
-$ git clone --branch 13TeV git@github.com:latinos/setup.git LatinosSetup   %clonnig the repo 'setup' of latinos github
-
-$ source LatinosSetup/Setup.sh              %setup Setup.sh by sourcing (or bash). %source: used to load any functions file into the current shell script or a command prompt.
+- Generate an [SSH key](https://help.github.com/articles/connecting-to-github-with-ssh/) and then initialize git locally
+```
+git cms-init
+```
+- Clone the 'setup' repository of latinos github
+```
+git clone --branch 13TeV git@github.com:latinos/setup.git LatinosSetup
+```
+- Setup 'Setup.sh' by sourcing (or ```bash```)
+```
+source LatinosSetup/Setup.sh
+```
 
 Clonning more repos:
 
