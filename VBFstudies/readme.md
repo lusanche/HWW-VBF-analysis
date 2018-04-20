@@ -1,4 +1,4 @@
-#### Some useful links:
+### Some useful links:
 
 * Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
 
@@ -8,12 +8,12 @@
 
 * Access to the github repository Latinos: https://github.com/latinos
 
-### 1. Setup Latinos framework
+## 1. Setup Latinos framework
 
 - Access your lxplus account: ```ssh -Y username@lxplus.cern.ch```
 - Login shell: ```bash -l```
 
-#### 1.1 Build the work area:
+#### 1.1. Build the work area:
 - See installed projects available for platform and build work area
 ```
 scram list CMSSW
@@ -27,7 +27,7 @@ cmsenv
 ```
 or ```eval `scramv1 runtime -sh` ```
 
-#### 1.2 Setup github repository:
+#### 1.2. Setup github repository:
 
 - Generate an [SSH key](https://help.github.com/articles/connecting-to-github-with-ssh/) and then initialize git locally
 ```
@@ -42,48 +42,22 @@ git clone --branch 13TeV git@github.com:latinos/setup.git LatinosSetup
 source LatinosSetup/Setup.sh
 ```
 
-Clonning more repos:
+## 2. VBF analysis: Plots configuration for mkShapes, mkPlot, mkDatacards
+```
+cd LatinoAnalysis/ShapeAnalysis/
+git clone git@github.com:latinos/PlotsConfigurations.git %clonnig the repo 'PlotsConfigurations' of latinos github
+cmsenv
+```
+Compile ```$ scramv1 b``` or ```scramv1 b -j 10```
+```
+cd PlotsConfigurations/Configurations/VBF/
+```
+look at files and modify them according to the interest.
 
-$ cd LatinoAnalysis/ShapeAnalysis/
-
-$ git clone git@github.com:latinos/PlotsConfigurations.git %clonnig the repo 'PlotsConfigurations' of latinos github
-
-$ cmsenv
-
-$ scramv1 b                                 %compile (or scramv1 b -j 10)
-
-## VBF analysis:
-
-$ cd PlotsConfigurations/Configurations/VBF/
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-1. First time only 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
-
-cd $COMBINE_DIRECTORY
-
-Get Andrea's scripts to modify datacards.
-
-cd $COMBINE_DIRECTORY
-
-git clone https://github.com/amassiro/ModificationDatacards
-
-Copy and edit the latino user configuration file.
-
-cd $CMSSW_DIRECTORY/LatinoAnalysis/Tools/python
-
-cp userConfig_TEMPLATE.py userConfig.py
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-look at samples.py
+#### 2.1. Produce histograms:
 
 Full2016]$ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-2. Produce histograms
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This step reads the post-processed latino trees and produces histograms for several variables and phase spaces.
 
@@ -154,3 +128,25 @@ $ popd
 $ cp plotVBF/*png $HOME/www/new_directory/
 
 Time to check and share the results: https://lusanche.web.cern.ch/lusanche/*/new_directory/
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1. First time only 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
+
+cd $COMBINE_DIRECTORY
+
+Get Andrea's scripts to modify datacards.
+
+cd $COMBINE_DIRECTORY
+
+git clone https://github.com/amassiro/ModificationDatacards
+
+Copy and edit the latino user configuration file.
+
+cd $CMSSW_DIRECTORY/LatinoAnalysis/Tools/python
+
+cp userConfig_TEMPLATE.py userConfig.py
