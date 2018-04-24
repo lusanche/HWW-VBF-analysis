@@ -1,6 +1,6 @@
 ### Some useful links:
 
-* Twiki Latinos: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV
+* Twiki Latinos:  [Analysis 13TeV](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV) ,  [Framework for 2017](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosFrameworkFor2017)  and  [Tutorials](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosFrameworkTutorials)
 
 * To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
 
@@ -48,7 +48,7 @@ cd LatinoAnalysis/ShapeAnalysis/
 git clone git@github.com:latinos/PlotsConfigurations.git
 cmsenv
 ```
-Compile ```$ scramv1 b``` or ```scramv1 b -j 10```
+Compile ```$ scramv1 b -j8```
 ```
 cd PlotsConfigurations/Configurations/VBF/
 ```
