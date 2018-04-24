@@ -48,7 +48,7 @@ cd LatinoAnalysis/ShapeAnalysis/
 git clone git@github.com:latinos/PlotsConfigurations.git
 cmsenv
 ```
-Compile ```$ scramv1 b -j8```
+Compile ```scramv1 b -j8```
 ```
 cd PlotsConfigurations/Configurations/VBF/
 ```
