@@ -112,7 +112,7 @@ wget https://raw.githubusercontent.com/latinos/PlotsConfigurations/master/index.
 popd
 cp plotVBF/*png $HOME/www/new_directory/
 ```
-Time to check and share the results: `https://lusanche.web.cern.ch/lusanche/*/new_directory/`
+Time to check and share the results: `https://username.web.cern.ch/username/*/new_directory/`
 
 ## 4. Play with datacards:
 
@@ -120,15 +120,13 @@ Time to check and share the results: `https://lusanche.web.cern.ch/lusanche/*/ne
 - [CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)
 - Transform datacard in to table
 ```
-./tableFromCards.py  hww-12.9.mH125_of2jvbf_dnn0.3.txt
+./tableFromCards.py  hww-12.9.mH125_of2jvbf_dnn.txt
 ```
 https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py
 ```
 python   scripts/prepareTables2.py
 python   scripts/prepareTables2.py  |  /bin/sh
-python   systematicsAnalyzer.py   \
-         /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_0_5/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/datacards/hww2l2v_13TeV_of2jvbf/mll/datacard.txt   \
-         --all       -m      125     -f    tex         >      hww-12.9.mH125_of2jvbf_dnn0.3.tex
+python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
 you need to install the Higgs combine package (ROOT6 SLC6 release CMSSW_7_4_X)
 
@@ -138,19 +136,17 @@ to better debug, try to have only 1 signal sample, 1 background sample and data.
 
 From the error (that is a "combine" error) it seems you did not run on data.
 
-
 Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
-
+```
 cd $COMBINE_DIRECTORY
-
+```
 Get Andrea's scripts to modify datacards.
-
+```
 cd $COMBINE_DIRECTORY
-
 git clone https://github.com/amassiro/ModificationDatacards
-
+```
 Copy and edit the latino user configuration file.
-
+```
 cd $CMSSW_DIRECTORY/LatinoAnalysis/Tools/python
-
 cp userConfig_TEMPLATE.py userConfig.py
+```
