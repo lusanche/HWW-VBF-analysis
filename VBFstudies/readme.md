@@ -8,6 +8,8 @@
 
 * Access to the github repository Latinos: https://github.com/latinos
 
+* [EOS](https://github.com/piedraj/AnalysisCMS#9-eos)
+
 ## 1. Setup Latinos framework
 
 - Access your lxplus account: ```ssh -Y username@lxplus.cern.ch```
