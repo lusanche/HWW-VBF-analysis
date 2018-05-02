@@ -25,7 +25,7 @@ cp anyVariable.py newVariable.py
 ```diff
 + modules['newvariableFiller']=NewVariableFiller()
 ```
-### 4. Document how-to use it in Gardener/test/README.md :
+### 4. Document how-to use it :
 ```
 cd ../../scripts/
 gardener.py  newVariableFiller  input.root  output.root
