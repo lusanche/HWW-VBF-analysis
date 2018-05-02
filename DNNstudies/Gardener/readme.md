@@ -40,5 +40,5 @@ vim ~/.keras/keras.json
 ### 5. Document how-to use it :
 ```
 cd ../../scripts/
-gardener.py  newVariableFiller  input.root  output.root
+python gardener.py  newVariableFiller  input.root  output.root
 ```
