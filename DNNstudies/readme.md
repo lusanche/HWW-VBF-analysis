@@ -49,9 +49,3 @@ BTW, the doHadd step will not work if jobs are not done or if some root files ar
 Similarly the doBatch step will refuse to resubmit jobs unless all are done on the farm.
 
 Then you should be able to do the mkPlot and other mkDatacards command on top of the file resulting from the hadd.
-
-```ruby
-  def foo
-    puts 'bar'
-  end
-```
