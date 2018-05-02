@@ -19,9 +19,9 @@ python get-pip.py --user
 ```
 ~/.local/bin/pip install --user keras
 ```
-## 2. Shape analysis with DNN
+## 2. Shape analysis with DNN (batch queue mode for mkShape)
 
-### 2.1. Run the command:
+### 2.1. To make the batch interface working:
 ```
 cd LatinoAnalysis/Tools/python/
 cp userConfig_TEMPLATE.py userConfig.py
@@ -31,9 +31,24 @@ edit the `userConfig.py` to put a directory in your own user area
 ### 2.2. To submit the jobs:
 ```
  mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doBatch=True --batchSplit=Cuts,Samples
- ```
- ### 2.3. Check you the status of jobs:
 ```
- mkBatch.py -s
- ```
+Where the `batchSplit` option is controlling the way you split your jobs by Cuts and Samples, i.e. removing some of them you can by example run all samples in single job per Samples (`#jobs = #Samples`) or all Cuts in single jobs per Samples (`#jobs = #Cuts`) or even removing it fully run everything in a single job.
  
+ ### 2.3. Check you the job status disployed:
+```
+LatinoAnalysis/Tools/scripts/mkBatch.py -s
+```
+When all the jobs are done, you have to perform an ‘hadd’ by doing:
+```
+mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doHadd=True --batchSplit=Cuts,Samples
+```
+BUT making sure you use the same `—batchSplit=` as in the first command.
+
+BTW, the doHadd step will not work if jobs are not done or if some root files are missing and it will throw you an error.
+
+Similarly the doBatch step will refuse to resubmit jobs unless all are done on the farm.
+
+Then you should be able to do the ~mkPlot~ and other mkDatacards command on top of the file resulting from the hadd.
+
+Let me known if this does not work … as I tested it only with a simple config.
+
