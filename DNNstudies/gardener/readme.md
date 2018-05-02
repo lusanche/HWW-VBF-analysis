@@ -2,7 +2,7 @@
 
 Common tools to modify tree variables, add new variables, add weights, ...
 
-### 0. Build a compatible area and setup github:
+### 0. Build a compatible area and setup github repository:
 ```
 export SCRAM_ARCH=slc6_amd64_gcc530
 cmsrel CMSSW_8_0_26_patch1
