@@ -22,20 +22,12 @@ cp anyVariable.py newVariable.py
 + from LatinoAnalysis.Gardener.variables.newVariable      import NewVariableFiller
 ```
 ### 3. Add it to the list of nuisnaces in gardener.py :
-```diff
+```ruby
 + modules['newvariableFiller']=NewVariableFiller()
 ```
 ### 4. Using TensorFlow in Keras (locally)
 ```
 vim ~/.keras/keras.json
-```
-```diff
-+ {
-+    "image_dim_ordering": "tf",
-+    "epsilon": 1e-07,
-+    "floatx": "float32",
-+    "backend": "tensorflow"
-+ }
 ```
 ```ruby
 {
