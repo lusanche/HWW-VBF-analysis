@@ -50,20 +50,8 @@ Similarly the doBatch step will refuse to resubmit jobs unless all are done on t
 
 Then you should be able to do the mkPlot and other mkDatacards command on top of the file resulting from the hadd.
 
-
-<!DOCTYPE html>
-<html>
-<head>
-  <link href="http://a248.e.akamai.net/assets.github.com/stylesheets/bundle_github.css"
-        rel="stylesheet" type="text/css">
-  <script src='require.js' type='text/javascript'></script>
-  <script src='markdown.js' type='text/javascript'></script>
-</head>
-<body id="readme">
-<div id="markdown" class="wikistyle"></div>
-<script type="text/javascript">
-  require({paths:{text:"lib/text"}}, ["text!README.md"], function(readme) {
-    document.getElementById("markdown").innerHTML = markdown.toHTML(readme);
-  });
-</body>
-</html>
+```ruby
+  def foo
+    puts 'bar'
+  end
+```
