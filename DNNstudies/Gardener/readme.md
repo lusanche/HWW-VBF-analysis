@@ -17,9 +17,6 @@ cd LatinoAnalysis/Gardener/python/variables
 cp anyVariable.py newVariable.py
 ```
 ### 2. Import the new module in gardener.py :
-```
-cd ../../scripts/
-```
 * https://github.com/latinos/LatinoAnalysis/blob/master/Gardener/scripts/gardener.py
 ```diff
 + from LatinoAnalysis.Gardener.variables.newVariable      import NewVariableFiller
@@ -30,5 +27,6 @@ cd ../../scripts/
 ```
 ### 4. Document how-to use it in Gardener/test/README.md :
 ```
+cd ../../scripts/
 gardener.py  newVariableFiller  input.root  output.root
 ```
