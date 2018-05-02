@@ -25,7 +25,19 @@ cp anyVariable.py newVariable.py
 ```diff
 + modules['newvariableFiller']=NewVariableFiller()
 ```
-### 4. Document how-to use it :
+### 4. Using TensorFlow in Keras (locally)
+```
+vim ~/.keras/keras.json
+```
+```diff
++ {
++    "image_dim_ordering": "tf",
++    "epsilon": 1e-07,
++    "floatx": "float32",
++    "backend": "tensorflow"
++ }
+```
+### 5. Document how-to use it :
 ```
 cd ../../scripts/
 gardener.py  newVariableFiller  input.root  output.root
