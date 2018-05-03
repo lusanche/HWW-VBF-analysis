@@ -30,7 +30,7 @@ edit the `userConfig.py` to put a directory in your own user area
 
 ### 2.2. To submit the jobs:
 ```
- mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doBatch=True --batchSplit=Cuts,Samples
+mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doBatch=True --batchSplit=Cuts,Samples
 ```
 Where the `batchSplit` option is controlling the way you split your jobs by Cuts and Samples, i.e. removing some of them you can by example run all samples in single job per Samples (`#jobs = #Samples`) or all Cuts in single jobs per Samples (`#jobs = #Cuts`) or even removing it fully run everything in a single job.
  
