@@ -54,7 +54,7 @@ Compile ```scramv1 b -j8```
 ```
 cd PlotsConfigurations/Configurations/VBF/
 ```
-look at files and modify them according to the interest. 
+look at samples.py 
 ```
 easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
 ```
