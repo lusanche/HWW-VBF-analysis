@@ -63,8 +63,7 @@ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expa
 
 - The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file)
 ```
-mkShapes.py     --pycfg=configuration.py  \
-                --inputDir=/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__formulasMC__wwSel  \
+mkShapes.py     --pycfg=configuration.py      --inputDir=<path-directory>  \
                 --batchSplit=AsMuchAsPossible            --doBatch=True            --batchQueue=2nd
 ```
 or without inputDir (added in samples.py)
@@ -79,10 +78,9 @@ ls -l jobs/mkShapes__VBF/*.jid
 ```
 - If you find .jid files it means that the corresponding jobs failed, check the .err and .out files to understand the reason of the failure.
 
-- If a job takes too long/fails, one can [kill](https://twiki.cern.ch/twiki/bin/view/Main/BatchJobs#JobKill) it and resubmit manually, e.g.:
+- If a job takes too long/fails, one can [job kill](https://twiki.cern.ch/twiki/bin/view/Main/BatchJobs#JobKill) it and resubmit manually, e.g.:
 ```
 bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Vg.sh
-bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Fake9.sh
 ```
 - If several jobs failed and you want to resubmit them all at once you can do:
 ```
@@ -92,7 +90,7 @@ for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
 
 - Once the previous jobs have finished we hadd the outputs, put all your apples in one basket
 ```
-mkShapes.py      --pycfg=configuration.py      --batchSplit=AsMuchAsPossible             --doHadd=True
+mkShapes.py      --pycfg=configuration.py      --batchSplit=AsMuchAsPossible       --doHadd=True
 ```
 NB: If the ```--batchSplit=AsMuchAsPossible``` option is used, do not hadd the outputs by hand but use the command above instead.    Otherwise the MC statistical uncertainties are not treated in the correct way.
 
