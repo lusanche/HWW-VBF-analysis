@@ -63,12 +63,11 @@ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expa
 
 - The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file)
 ```
-mkShapes.py     --pycfg=configuration.py      --inputDir=<path-directory>  \
-                --batchSplit=AsMuchAsPossible            --doBatch=True            --batchQueue=2nd
-```
-or without inputDir (added in samples.py)
-```
-mkShapes.py     --pycfg=configuration.py    --batchSplit=AsMuchAsPossible    --doBatch=True    --batchQueue=2nd
+mkShapes.py     --pycfg=configuration.py \
+                --inputDir=/eos/cms/store/caf/user/lenzip/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel__doDNN/  \
+                --batchSplit=AsMuchAsPossible \
+                --doBatch=True \
+                --batchQueue=2nd
 ```
 - The jobs can take a while, thus it is natural to check their status: ```mkBatch.py         -s```
 
@@ -90,7 +89,10 @@ for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
 
 - Once the previous jobs have finished we hadd the outputs, put all your apples in one basket
 ```
-mkShapes.py      --pycfg=configuration.py      --batchSplit=AsMuchAsPossible       --doHadd=True
+mkShapes.py      --pycfg=configuration.py \
+                 --inputDir=/eos/cms/store/caf/user/lenzip/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel__doDNN/ \
+                 --batchSplit=AsMuchAsPossible \
+                 --doHadd=True
 ```
 NB: If the ```--batchSplit=AsMuchAsPossible``` option is used, do not hadd the outputs by hand but use the command above instead.    Otherwise the MC statistical uncertainties are not treated in the correct way.
 
