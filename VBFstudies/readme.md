@@ -120,7 +120,7 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
 
 ## 4. Play with datacards:
 
-- https://github.com/latinos/PlayWithDatacards
+- https://github.com/latinos/PlayWithDatacards (cd PlayWithDatacards, cmssw81x)
 - [CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)
 - Transform datacard in to table
 ```
