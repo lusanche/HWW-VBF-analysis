@@ -69,13 +69,14 @@ mkShapes.py     --pycfg=configuration.py \
                 --doBatch=True \
                 --batchQueue=2nd
 ```
--- Do not forget to address the jobs
+  Do not forget to address the jobs
 ```
 cd LatinoAnalysis/Tools/python/
 cp userConfig_TEMPLATE.py userConfig.py
 ```
-and edit the 'userConfig.py' to put a directory in your own user area:
-/afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_X_Y/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/
+  and edit the 'userConfig.py' to put a directory in your own user area:
+
+  /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_X_Y/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/
 
 - The jobs can take a while, thus it is natural to check their status: ```mkBatch.py         -s```
 
