@@ -61,6 +61,13 @@ easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expa
 
 #### 2.1. Produce histograms:
 
+- Do not forget to address the jobs and edit the 'userConfig.py' to put a directory in your own user area:
+
+/afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_X_Y/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/
+```
+cd LatinoAnalysis/Tools/python/
+cp userConfig_TEMPLATE.py userConfig.py
+```
 - The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file)
 ```
 mkShapes.py     --pycfg=configuration.py \
@@ -69,15 +76,6 @@ mkShapes.py     --pycfg=configuration.py \
                 --doBatch=True \
                 --batchQueue=2nd
 ```
-  Do not forget to address the jobs
-```
-cd LatinoAnalysis/Tools/python/
-cp userConfig_TEMPLATE.py userConfig.py
-```
-  and edit the 'userConfig.py' to put a directory in your own user area:
-
-  /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_X_Y/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/
-
 - The jobs can take a while, thus it is natural to check their status: ```mkBatch.py         -s```
 
 - After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (tag is specified in configuration.py):
