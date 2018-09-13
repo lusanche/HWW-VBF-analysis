@@ -127,21 +127,17 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
 
 ## 4. Play with datacards:
 
-- https://github.com/latinos/PlayWithDatacards (cd PlayWithDatacards, cmssw81x)
-- [CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)
 - Transform datacard in to table
 ```
 ./tableFromCards.py  hww-12.9.mH125_of2jvbf_dnn.txt
 ```
-https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py
+- Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (cd .../PlayWithDatacards)
 ```
 python   scripts/prepareTables2.py
 python   scripts/prepareTables2.py  |  /bin/sh
 python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
-you need to install the Higgs combine package (ROOT6 SLC6 release CMSSW_7_4_X)
-
-https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit
+- Install the Higgs combine package ([ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49)
 
 to better debug, try to have only 1 signal sample, 1 background sample and data.
 
