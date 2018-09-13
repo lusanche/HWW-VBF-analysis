@@ -127,18 +127,38 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
 
 ## 4. Play with datacards:
 
-- Transform datacard in to table
+- Setup everything that is needed:
+
+  - Install the Higgs Combine Package with [ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49).
+  
+  - Clone some repositories (in CMSSW810):
 ```
-./tableFromCards.py  hww-12.9.mH125_of2jvbf_dnn.txt
+git clone git@github.com:amassiro/PlayWithDatacards.git
+git clone git@github.com:amassiro/ModificationDatacards.git
 ```
-- Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (cd .../PlayWithDatacards)
+  - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd .../PlayWithDatacards```).
+  
+  - Activate Combine:
+  ```
+  cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit
+  cmsenv
+  scramv1 b -j 20
+  cd -
+  ```
+- Modify the content for your analysis:
+```
+cp scripts/prepareTable.py scripts/prepareTable2.py
+vim scripts/prepareTable2.py
+```
+- Create table running (for a set of datacards):
 ```
 python   scripts/prepareTables2.py
 python   scripts/prepareTables2.py  |  /bin/sh
+```
+- Or for a specific datacrd:
+```
 python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
-- Install the Higgs combine package ([ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X)), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49)
-
 to better debug, try to have only 1 signal sample, 1 background sample and data.
 
 From the error (that is a "combine" error) it seems you did not run on data.
