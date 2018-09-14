@@ -162,18 +162,3 @@ python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex
 to better debug, try to have only 1 signal sample, 1 background sample and data.
 
 From the error (that is a "combine" error) it seems you did not run on data.
-
-Get the combine package. Follow the instructions documented in the revision r170 of the combine twiki.
-```
-cd $COMBINE_DIRECTORY
-```
-Get Andrea's scripts to modify datacards.
-```
-cd $COMBINE_DIRECTORY
-git clone https://github.com/amassiro/ModificationDatacards
-```
-Copy and edit the latino user configuration file.
-```
-cd $CMSSW_DIRECTORY/LatinoAnalysis/Tools/python
-cp userConfig_TEMPLATE.py userConfig.py
-```
