@@ -39,5 +39,5 @@ vim ~/.keras/keras.json
 ### 5. Document how-to use it :
 ```
 cd ../../scripts/
-python gardener.py  newVariableFiller  input.root  output.root
+./gardener.py vbfdnnvarFiller /eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__formulasMC__wwSel/latino_VBFHToWWTo2L2Nu_M125.root /eos/user/l/lusanche/Full2016/VBF_DNNvar/latino_VBFHToWWTo2L2Nu_M125_DNN.root
 ```
