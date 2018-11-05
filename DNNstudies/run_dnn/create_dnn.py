@@ -101,21 +101,21 @@ loaded_model.load_weights('model_weight/weights'+bsne+nnxhl+'.h5')
 ## split the attributes (columns) into input (X) and output (Y) variables...
 X_testing = dataset_testing[:,0:12] #  columns
 X_testing = Normalize(X_testing) # norm
-W_testing = abs(dataset_testing[:,12]) # weights
+#W_testing = abs(dataset_testing[:,12]) # weights
 Y_testing = dataset_testing[:,13] # class: final columns
 
 ## RST: Fix random seed for reproducibility
-seed = 7 # Only shuffles the array along the first axis of a multi-dimensional array.
-np.random.seed(seed)
-np.random.shuffle(X_testing)
-np.random.seed(seed)
-np.random.shuffle(Y_testing)
-np.random.seed(seed)
-np.random.shuffle(W_testing)
+#seed = 7 # Only shuffles the array along the first axis of a multi-dimensional array.
+#np.random.seed(seed)
+#np.random.shuffle(X_testing)
+#np.random.seed(seed)
+#np.random.shuffle(Y_testing)
+#np.random.seed(seed)
+#np.random.shuffle(W_testing)
 
 ## evaluate loaded model on test data
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-score = loaded_model.evaluate(X_testing, Y_testing, verbose=0, sample_weight=W_testing)
+score = loaded_model.evaluate(X_testing, Y_testing, verbose=0)#, sample_weight=W_testing)
 
 ## Calculate predictions
 predictions_train = loaded_model.predict(X_training)
