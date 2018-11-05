@@ -32,6 +32,13 @@ from keras.models import model_from_json
 seed = 7
 numpy.random.seed(seed)
 
+## input normalization function
+def Normalize(a):
+  max = np.amax(a,axis=0)
+  min = np.amin(a,axis=0)
+  norm = (a-min)/(max-min)
+  return norm
+
 #loads the model
 baseCMSSW = os.getenv('CMSSW_BASE')
 smodel = baseCMSSW+"/src/LatinoAnalysis/Gardener/python/data/vbfdnn/model.json"
@@ -100,7 +107,7 @@ class DNNvarFiller(TreeCloner):
             X_test[ientry][11] = i.std_vector_jet_phi[1]
             ientry = ientry + 1
         
-        Y_pred  = loaded_model.predict(X_test)
+        Y_pred  = loaded_model.predict(Normalize(X_test))
 
         print '- Starting eventloop'
         step = 5000
