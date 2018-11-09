@@ -61,8 +61,11 @@ git checkout v7.0.8
 scramv1 b clean; scramv1 b # always make a clean build
 ```
 ### 2.4. Expected/Observed significance
+```
+combine -M Significance -t -1 --expectSignal=1 datacard.txt
+```
 
 ### 2.5. Lumiscale
 ```
-combine -M Significance -t -1 --expectSignal=1 --setParameters lumiscale=2.78551 --freezeParameters lumiscale test_lumiscale/datacards_15Sep_SRvbf_combine2/hww2l2v_13TeV_of2j_vbf/DNNvar/datacard.txt
+combine -M Significance -t -1 --expectSignal=1 --setParameters lumiscale=2.78551 --freezeParameters lumiscale datacard.txt
 ```
