@@ -2,50 +2,43 @@
 # DNN analysis
 Using NN and Deep Learning to optimize the VBF selection
 
-## 1 Install Keras on LXPLUS
+## 1. Gardener
 
-### 1.1 Get Python 2.7 in your path:
+Common tools to modify tree variables, add new variables, add weights, ...
+
+### 1.0. Build a compatible area and setup github repository:
 ```
-cmsrel CMSSW_X_Y_Z
-cd CMSSW_X_Y_Z/src
+export SCRAM_ARCH=slc6_amd64_gcc630
+cmsrel CMSSW_9_4_6_patch1
+cd CMSSW_9_4_6_patch1/src/
 cmsenv
+git clone git@github.com:latinos/LatinoAnalysis.git
+scram b
 ```
-### 1.2. Install PIP locally:
+### 1.1. First copy an existing module :
 ```
-wget https://bootstrap.pypa.io/get-pip.py 
-python get-pip.py --user
+cd LatinoAnalysis/Gardener/python/variables
+cp anyVariable.py newVariable.py
 ```
-### 1.3. Install Keras locally:
+### 1.2. Import the new module in [gardener.py](https://github.com/latinos/LatinoAnalysis/blob/master/Gardener/scripts/gardener.py) :
+```ruby
+from LatinoAnalysis.Gardener.variables.VBF_DNNvar      import DNNvarFiller
 ```
-~/.local/bin/pip install --user keras
+### 1.3. Add it to the list of nuisnaces in gardener.py :
+```ruby
+modules['vbfdnnvarFiller'] = DNNvarFiller()
 ```
+### 1.4. Document how-to use it :
+```
+cd ../../scripts/
+./gardener.py vbfdnnvarFiller \
+/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__formulasMC__wwSel/latino_VBFHToWWTo2L2Nu_M125.root \
+/eos/user/l/lusanche/Full2016/VBF_DNNvar/latino_VBFHToWWTo2L2Nu_M125_DNN.root
+```
+
 ## 2. Shape analysis with DNN (batch queue mode for mkShape)
+after obtaining a data card  in [VBF analysis]{https://github.com/lusanche/HWWanalysis/tree/master/VBFstudies#2-vbf-analysis-plots-configuration-for-mkshapes-mkplot-mkdatacards}
 
-### 2.1. To make the batch interface working:
-```
-cd LatinoAnalysis/Tools/python/
-cp userConfig_TEMPLATE.py userConfig.py
-```
-edit the `userConfig.py` to put a directory in your own user area
+### 2.1. 
 
-### 2.2. To submit the jobs:
-```
-mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doBatch=True --batchSplit=Cuts,Samples
-```
-Where the `batchSplit` option is controlling the way you split your jobs by Cuts and Samples, i.e. removing some of them you can by example run all samples in single job per Samples (`#jobs = #Samples`) or all Cuts in single jobs per Samples (`#jobs = #Cuts`) or even removing it fully run everything in a single job.
- 
- ### 2.3. Check you the job status disployed:
-```
-LatinoAnalysis/Tools/scripts/mkBatch.py -s
-```
-When all the jobs are done, you have to perform an ‘hadd’ by doing:
-```
-mkShapes.py —pycfg=<Config>  —inputDir=<Dir> --doHadd=True --batchSplit=Cuts,Samples
-```
-BUT making sure you use the same `—batchSplit=` as in the first command.
-
-BTW, the doHadd step will not work if jobs are not done or if some root files are missing and it will throw you an error.
-
-Similarly the doBatch step will refuse to resubmit jobs unless all are done on the farm.
-
-Then you should be able to do the mkPlot and other mkDatacards command on top of the file resulting from the hadd.
+### 2.2. 
