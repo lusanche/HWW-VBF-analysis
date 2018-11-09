@@ -2,7 +2,7 @@
 # DNN analysis
 Using NN and Deep Learning to optimize the VBF selection
 
-## 1. Gardener
+## 1. Gardener module
 
 Common tools to modify tree variables, add new variables, add weights, ...
 
@@ -36,9 +36,27 @@ cd ../../scripts/
 /eos/user/l/lusanche/Full2016/VBF_DNNvar/latino_VBFHToWWTo2L2Nu_M125_DNN.root
 ```
 
-## 2. Shape analysis with DNN (batch queue mode for mkShape)
-after obtaining a data card  in [VBF analysis]{https://github.com/lusanche/HWWanalysis/tree/master/VBFstudies#2-vbf-analysis-plots-configuration-for-mkshapes-mkplot-mkdatacards}
+## 2. [Shape analysis](https://cms-hcomb.gitbooks.io/combine/content/part2/settinguptheanalysis.html#shape-analysis) with DNN (batch queue mode for mkShape)
+after obtaining a data card  in [VBF analysis](https://github.com/lusanche/HWWanalysis/tree/master/VBFstudies#2-vbf-analysis-plots-configuration-for-mkshapes-mkplot-mkdatacards), prepare to use [combine](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HATSatLPC2014StatisticsTools)
 
-### 2.1. 
-
-### 2.2. 
+### 2.1. Setting up the environment (once)
+```
+export SCRAM_ARCH=slc6_amd64_gcc530
+cmsrel CMSSW_8_1_0
+cd CMSSW_8_1_0/src 
+cmsenv
+```
+### 2.2. Standalone compilation in lxplus
+```
+git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+cd HiggsAnalysis/CombinedLimit
+source env_standalone.sh
+make -j 8; make # second make fixes compilation error of first
+```
+### 2.3. Update to a reccomended tag - currently the reccomended tag is v7.0.8
+```
+cd $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit
+git fetch origin
+git checkout v7.0.8
+scramv1 b clean; scramv1 b # always make a clean build
+```
