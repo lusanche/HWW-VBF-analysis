@@ -77,7 +77,7 @@ void root_to_txt(){
            }
            //cout << nevents++ << endl;
 	   float s1, b1, b2, b3, b4, s1_2;
-           if (i==0) s1_2 = nevents2++*0.004883844;
+           if (i==0) s1_2 = nevents2++*0.004883844;//weight_XS
            if (i==0) s1 = nevents++*0.004883844;
            if (i==1) b1 = nevents++*0.047373230;
            if (i==2) b2 = nevents++*0.114803188;
