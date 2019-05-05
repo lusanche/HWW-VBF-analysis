@@ -7,16 +7,17 @@ Using NN and Deep Learning to optimize the VBF selection
 
 Divided in three steps: data txt format, running DNN model and creating DNN variable.
 
-### 1.0. Creating our data in TXT format:
+### 1.1. Creating our data in TXT format:
 
 A binary classification problem (signal as 1 or bacgorund as 0) for all of the input variables that describe each process.
-[create_txt.C](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/data_txt/create_txt.C)
 
-### 1.1. Build a compatible area and setup github repository:
+See template in [create_txt.C](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/data_txt/create_txt.C).
+
+### 1.2. Build a compatible area and setup github repository:
 
 rrr
 
-### 1.2. Build a compatible area and setup github repository:
+### 1.3. Build a compatible area and setup github repository:
 
 rrr
 
@@ -24,7 +25,7 @@ rrr
 
 Common tools to modify tree variables, add new variables, add weights, ...
 
-### 2.0. Build a compatible area and setup github repository:
+### 2.1. Build a compatible area and setup github repository:
 ```
 export SCRAM_ARCH=slc6_amd64_gcc630
 cmsrel CMSSW_9_4_6_patch1
@@ -33,20 +34,20 @@ cmsenv
 git clone git@github.com:latinos/LatinoAnalysis.git
 scram b
 ```
-### 2.1. First copy an existing module :
+### 2.2. First copy an existing module :
 ```
 cd LatinoAnalysis/Gardener/python/variables
 cp anyVariable.py newVariable.py
 ```
-### 2.2. Import the new module in [gardener.py](https://github.com/latinos/LatinoAnalysis/blob/master/Gardener/scripts/gardener.py) :
+### 2.3. Import the new module in [gardener.py](https://github.com/latinos/LatinoAnalysis/blob/master/Gardener/scripts/gardener.py) :
 ```ruby
 from LatinoAnalysis.Gardener.variables.VBF_DNNvar      import DNNvarFiller
 ```
-### 2.3. Add it to the list of nuisnaces in gardener.py :
+### 2.4. Add it to the list of nuisnaces in gardener.py :
 ```ruby
 modules['vbfdnnvarFiller'] = DNNvarFiller()
 ```
-### 2.4. Document how-to use it :
+### 2.5. Document how-to use it :
 ```
 cd ../../scripts/
 ./gardener.py vbfdnnvarFiller \
