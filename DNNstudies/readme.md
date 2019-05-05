@@ -7,6 +7,14 @@ Using NN and Deep Learning to optimize the VBF selection
 Common tools to modify tree variables, add new variables, add weights, ...
 
 ### 1.0. Build a compatible area and setup github repository:
+
+
+
+## 1. Gardener module
+
+Common tools to modify tree variables, add new variables, add weights, ...
+
+### 1.0. Build a compatible area and setup github repository:
 ```
 export SCRAM_ARCH=slc6_amd64_gcc630
 cmsrel CMSSW_9_4_6_patch1
