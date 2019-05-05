@@ -3,9 +3,21 @@
 
 Using NN and Deep Learning to optimize the VBF selection
 
-## 1. Gardener
+## 1. Creating a discriminant: DNN variable
 
-Common tools to modify tree variables, add new variables, add weights, ...
+Divided in three steps: data txt format, running DNN model and creating DNN variable.
+
+### 1.0. Creating our data in TXT format:
+
+A binary classification problem (signal as 1 or bacgorund as 0).
+
+### 1.1. Build a compatible area and setup github repository:
+
+rrr
+
+### 1.2. Build a compatible area and setup github repository:
+
+rrr
 
 ### 1.0. Build a compatible area and setup github repository:
 
