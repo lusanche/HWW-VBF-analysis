@@ -5,20 +5,20 @@
 using namespace std;
 
 void root_to_txt(){
-  TString filenames[5]={"/home/juniorhiggs/Desktop/Latinos/Full2016/KERAS/3.using_dnn/dnn_samples/using_weights/latino_vbf_m125v1_alt_reduced.root",
-                        "/home/juniorhiggs/Desktop/Latinos/Full2016/KERAS/3.using_dnn/dnn_samples/using_weights/latino_ggf_reduced.root",
-                        "/home/juniorhiggs/Desktop/Latinos/Full2016/KERAS/3.using_dnn/dnn_samples/using_weights/latino_ww_reduced.root",
-                        "/home/juniorhiggs/Desktop/Latinos/Full2016/KERAS/3.using_dnn/dnn_samples/using_weights/latino_DYJetsToLL_M-10andTT_M-50_reduced.root",
-                        "/home/juniorhiggs/Desktop/Latinos/Full2016/KERAS/3.using_dnn/dnn_samples/using_weights/latino_top_reduced.root"};
+  TString filenames[5]={"latino_vbf_m125v1_alt_reduced.root",
+                        "latino_ggf_reduced.root",
+                        "latino_ww_reduced.root",
+                        "latino_DYJetsToLL_M-10andTT_M-50_reduced.root",
+                        "latino_top_reduced.root"};
 
 			
   for (int i=0; i<5; i++) {
-       TFile *samples=new TFile(filenames[i]);  
-       TTree *t=(TTree*)samples->Get("latino");
+      TFile *samples=new TFile(filenames[i]);  
+      TTree *t=(TTree*)samples->Get("latino");
        
-       std::vector<float> *ptl, *etal, *phil, *flal, *ptj, *etaj, *phij, *cmvaj;
-       float ptll, mth, mll, metPfType1, metPfType1Phi, metPfType1SumEt, njet, detajj, mjj, drll;
-       double DNNvar;
+      std::vector<float> *ptl, *etal, *phil, *flal, *ptj, *etaj, *phij, *cmvaj;
+      float ptll, mth, mll, metPfType1, njet, detajj, mjj, drll;//, metPfType1Phi, metPfType1SumEt
+      //double DNNvar;
   
       t->SetBranchAddress("std_vector_lepton_pt",&ptl);
       t->SetBranchAddress("std_vector_lepton_eta",&etal);
@@ -36,7 +36,7 @@ void root_to_txt(){
       t->SetBranchAddress("metPfType1",&metPfType1);
       t->SetBranchAddress("njet",&njet);
       t->SetBranchAddress("drll",&drll);
-      t->SetBranchAddress("DNNvar",&DNNvar);
+      //t->SetBranchAddress("DNNvar",&DNNvar);
       
 
       int nevents = 0, nevents2 = 0;
@@ -61,7 +61,7 @@ void root_to_txt(){
 	       }
 	       
 	   if ( mll>12 && (ptl1>25&&ptl2>10&&ptl3<10) && metPfType1>20 && ptll>30 && (flal1*flal2==-11*13)// && (detajj>3.5 && mll<80 && drll<2.0)
-	        && (abs(flal2)==13||ptl2>13) && (mth>=60&&mth<125) && njet==2 && (abs(etaj1)<4.7&&abs(etaj2)<4.7) && mjj>400 && DNNvar>dnncut
+	        && (abs(flal2)==13||ptl2>13) && (mth>=60&&mth<125) && njet==2 && (abs(etaj1)<4.7&&abs(etaj2)<4.7) && mjj>400// && DNNvar>dnncut
 	        && (ptj1>=30&&ptj2>=30) && (cmvaj1<bveto&&cmvaj2<bveto) && (ptj3<ptj_threshold||cmvaj3<bveto) && (ptj4<ptj_threshold||cmvaj4<bveto) 
 		&& (ptj5<ptj_threshold||cmvaj5<bveto) && (ptj6<ptj_threshold||cmvaj6<bveto) && (ptj7<ptj_threshold||cmvaj7<bveto) && (ptj8<ptj_threshold||cmvaj8<bveto) 
 		&& (ptj9<ptj_threshold||cmvaj9<bveto) && (ptj10<ptj_threshold||cmvaj10<bveto) ) {/*
