@@ -5,25 +5,29 @@ Using NN and Deep Learning to optimize the VBF selection
 
 ## 1. Creating a discriminant: DNN variable
 
-Divided in three steps: data txt format, running DNN model and creating DNN variable.
+Divided in three steps: data txt format, building DNN model and creating DNN variable.
 
 ### 1.1. Creating our data in TXT format:
 
-A binary classification problem (signal as 1 or backgorund as 0) for all of the input variables that describe each process.
+* A binary classification problem (signal as 1 or backgorund as 0) for all of the input variables that describe each process.
 
-See template in [create_txt.C](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/data_txt/create_txt.C).
+* See template in [create_txt.C](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/data_txt/create_txt.C).
 
 ### 1.2. Building a NN model/weight:
 
-The steps: load data, define, compile, fit and evaluate model.
+* The steps: load data, define, compile, fit and evaluate model.
 
-See template in [create_DNNmodel](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/run_dnn/create_dnn.py).
+*See template in [create_DNNmodel](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/run_dnn/create_dnn.py).
 
 Can look at the training and test performance in the same template as well.
 
-### 1.3. Build a compatible area and setup github repository:
+### 1.3. Creating the DNN variable:
 
-rrr
+Using DNN model/weight for building a DNN discriminant inside a tree.
+
+See template in [adding_DNN_in_a_tree](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/using_dnn/adding_dnn.py)
+
+Can do this using the gardener module.
 
 ## 2. Gardener module
 
