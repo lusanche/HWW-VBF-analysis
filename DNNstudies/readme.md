@@ -17,17 +17,17 @@ Divided in three steps: data txt format, building DNN model and creating DNN var
 
 * The steps: load data, define, compile, fit and evaluate model.
 
-*See template in [create_DNNmodel](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/run_dnn/create_dnn.py).
+* See template in [create_DNNmodel](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/run_dnn/create_dnn.py).
 
-Can look at the training and test performance in the same template as well.
+* Can look at the training and test performance in the same template as well.
 
 ### 1.3. Creating the DNN variable:
 
-Using DNN model/weight for building a DNN discriminant inside a tree.
+* Using DNN model/weight for building a DNN discriminant inside a tree.
 
-See template in [adding_DNN_in_a_tree](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/using_dnn/adding_dnn.py)
+* See template in [adding_DNN_in_a_tree](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/using_dnn/adding_dnn.py)
 
-Can do this using the gardener module.
+* Can do this using the gardener module.
 
 ## 2. Gardener module
 
