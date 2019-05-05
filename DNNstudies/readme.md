@@ -9,13 +9,17 @@ Divided in three steps: data txt format, running DNN model and creating DNN vari
 
 ### 1.1. Creating our data in TXT format:
 
-A binary classification problem (signal as 1 or bacgorund as 0) for all of the input variables that describe each process.
+A binary classification problem (signal as 1 or backgorund as 0) for all of the input variables that describe each process.
 
 See template in [create_txt.C](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/data_txt/create_txt.C).
 
-### 1.2. Build a compatible area and setup github repository:
+### 1.2. Building a NN model/weight:
 
-rrr
+The steps: load data, define, compile, fit and evaluate model.
+
+See template in [create_DNNmodel](https://github.com/lusanche/HWWanalysis/blob/master/DNNstudies/run_dnn/create_dnn.py).
+
+Can look at the training and test performance in the same template as well.
 
 ### 1.3. Build a compatible area and setup github repository:
 
