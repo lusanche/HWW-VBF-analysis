@@ -94,7 +94,7 @@ cd jobs/mkShapes__VBF
 for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
 ```
 
-- Once the previous jobs have finished we hadd the outputs, put all your apples in one basket
+- Once the previous jobs have finished we had the outputs, put all your apples in one basket
 ```
 mkShapes.py      --pycfg=configuration.py \
                  --inputDir=/eos/cms/store/caf/user/lenzip/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel__doDNN/ \
