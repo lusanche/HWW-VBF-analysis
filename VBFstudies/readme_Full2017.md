@@ -1,14 +1,4 @@
-### Some useful links:
-
-* Twiki Latinos:  [Analysis 13TeV](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosAnalyses13TeV) ,  [Framework for 2017](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosFrameworkFor2017)  and  [Tutorials](https://twiki.cern.ch/twiki/bin/view/CMS/LatinosFrameworkTutorials)
-
-* To join Latinos: https://github.com/orgs/latinos/invitation?via_email=1
-
-* Twiki page for VBF analysis: https://twiki.cern.ch/twiki/bin/view/CMS/LatinosVBF2016
-
-* Access to the github repository Latinos: https://github.com/latinos
-
-* [EOS](https://github.com/piedraj/AnalysisCMS#9-eos)
+### Setup for 2017 data:
 
 ## 1. Setup Latinos framework
 
