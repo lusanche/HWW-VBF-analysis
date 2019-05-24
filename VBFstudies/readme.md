@@ -134,16 +134,17 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
   
   - Clone some repositories (in CMSSW810):
 ```
+/afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_1_0/src/
 git clone git@github.com:amassiro/PlayWithDatacards.git
 git clone git@github.com:amassiro/ModificationDatacards.git
+
 ```
-  - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd .../PlayWithDatacards```).
+  - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd PlayWithDatacards```).
   
   - Activate Combine:
   ```
-  cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit
+  cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/
   cmsenv
-  scramv1 b -j 20
   cd -
   ```
 - Modify the content for your analysis:
