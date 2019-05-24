@@ -1,4 +1,10 @@
-## Configuration for 2017 data:
+## Configuration for 2017 data
+
+- treeBaseDir: /eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/
+
+- MC:   Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__l2loose__l2tightOR2017/
+- FAKE: Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__l2loose__fakeW/
+- DATA: Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__l2loose/
 
 ## 1. Setup Latinos framework
 
