@@ -12,6 +12,7 @@
 - Login shell: ```bash -l```
 
 #### 1.1. Setup a CMSSW release:
+
 - See installed projects available for platform and build work area
 ```
 scram list CMSSW
@@ -46,63 +47,56 @@ scram b -j 10
 ```
 
 ## 2. VBF analysis: Plots configuration for mkShapes, mkPlot, mkDatacards
+
+- Common tools for analysis
 ```
-cd LatinoAnalysis/ShapeAnalysis/
-git clone git@github.com:latinos/PlotsConfigurations.git
+cd Latinos/CMSSW_9_4_9/src/
+voms-proxy-init -voms cms -rfc --valid 168:0
 cmsenv
+cd PlotsConfigurations/Configurations/VBF/Full2017/
 ```
-Compile ```scramv1 b -j8```
-```
-cd PlotsConfigurations/Configurations/VBF/
-```
-look at samples.py 
+- Look at samples.py 
 ```
 easyDescription.py   --inputFileSamples=samples.py   --outputFileSamples=my_expanded_samples.py
 ```
 
-#### 2.1. Produce histograms:
+#### 2.1. Produce shapes:
 
-- Do not forget to address the jobs and edit the 'userConfig.py' to put a directory in your own user area:
-
-/afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_X_Y/src/LatinoAnalysis/ShapeAnalysis/PlotsConfigurations/Configurations/VBF/
+- Do not forget to address the Jobs and edit the 'userConfig.py' to put a directory in your own user area:
 ```
-cd LatinoAnalysis/Tools/python/
+cd /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_9_4_9/src/LatinoAnalysis/Tools/python/
 cp userConfig_TEMPLATE.py userConfig.py
 ```
+ modify baseDir = '/afs/cern.ch/user/l/lusanche/Latinos/CMSSW_9_4_9/src/PlotsConfigurations/Configurations/VBF/Full2017/'
+ 
 - The first step reads the post-processed latino trees and produces histograms for several variables and phase spaces (create a directory 'rootFile' where is 'plots_VBF.root' file)
 ```
-mkShapes.py     --pycfg=configuration.py \
-                --inputDir=/eos/cms/store/caf/user/lenzip/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel__doDNN/  \
-                --batchSplit=AsMuchAsPossible \
-                --doBatch=True \
-                --batchQueue=2nd
+cd -
+mkShapesMulti.py --pycfg=configuration.py --doBatch=1 --batchSplit=Samples,Files --batchQueue=workday
 ```
-- The jobs can take a while, thus it is natural to check their status: ```mkBatch.py         -s```
+- The jobs can take a while, thus it is natural to check their status: ```condor_q``` or ```mkBatch.py  -s```
 
-- After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (tag is specified in configuration.py):
+- After all your jobs are finished, and before going to the next step, check the .jid files in the following output directory (TAG is specified in configuration.py):
 ```
-ls -l jobs/mkShapes__VBF/*.jid
+ls -l jobs/mkShapes__TAG/*.jid
 ```
 - If you find .jid files it means that the corresponding jobs failed, check the .err and .out files to understand the reason of the failure.
 
-- If a job takes too long/fails, one can [job kill](https://twiki.cern.ch/twiki/bin/view/Main/BatchJobs#JobKill) it and resubmit manually, e.g.:
+- If a job takes too long/fails, one can understand [condor](http://batchdocs.web.cern.ch/batchdocs/local/quick.html) it and resubmit manually, e.g.:
 ```
-bsub -q 2nd jobs/mkShapes__VBF/mkShapes__VBF__hww2l2v_13TeV_of2j_vbf__Vg.sh
-```
-- If several jobs failed and you want to resubmit them all at once you can do:
-```
-cd jobs/mkShapes__VBF
-for i in *jid; do bsub -q 2nd ${i/jid/sh}; done
+../jobs/mkShapes__TAG/mkShapes__TAG__ALL__DATA.18.sh
 ```
 
-- Once the previous jobs have finished we had the outputs, put all your apples in one basket
+- Add root files: nce the previous jobs have finished we had the outputs, put all your apples in one basket
 ```
-mkShapes.py      --pycfg=configuration.py \
-                 --inputDir=/eos/cms/store/caf/user/lenzip/Apr2017_summer16/lepSel__MCWeights__bSFLpTEffMulti__cleanTauMC__l2loose__hadd__l2tightOR__LepTrgFix__dorochester__formulasMC__wwSel__doDNN/ \
-                 --batchSplit=AsMuchAsPossible \
-                 --doHadd=True
+mkShapesMulti.py --pycfg=configuration.py --doHadd=1  --batchSplit=Samples,Files
 ```
-NB: If the ```--batchSplit=AsMuchAsPossible``` option is used, do not hadd the outputs by hand but use the command above instead.    Otherwise the MC statistical uncertainties are not treated in the correct way.
+
+- If this is too slow try to hadd manually
+```
+cd rootFileTAG
+hadd -j 5 -f plots_TAG.root plots_TAG_ALL_*
+```
 
 #### 2.2.  Read histograms
 
@@ -110,11 +104,11 @@ At this stage one can either produce plots or datacards.
 
 - Produce plots: Now we are ready to make data/MC comparison plots.
 ```
-mkPlot.py              --inputFile=rootFile/plots_VBF.root           --showIntegralLegend=1
+mkPlot.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
 - Produce datacards
 ```
-mkDatacards.py             --pycfg=configuration.py          --inputFile=rootFile/plots_VBF.root
+mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
 ## 3. To move or copy the plots to the web,
 ```
@@ -163,3 +157,12 @@ python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex
 to better debug, try to have only 1 signal sample, 1 background sample and data.
 
 From the error (that is a "combine" error) it seems you did not run on data.
+
+
+
+- Make combination of datacards and workspaces by editing the script 'scripts/doCombination.sh' and running
+```
+./doCombination.sh
+```
+
+
