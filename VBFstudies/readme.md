@@ -128,20 +128,17 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
 
 ## 4. Play with datacards:
 
-- Setup everything that is needed:
-
-  - Install the Higgs Combine Package with [ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49).
+- Install the Higgs Combine Package with [ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49) in [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) .
   
-  - Clone some repositories (in CMSSW810):
+- Clone some repositories (in CMSSW810):
 ```
 /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_1_0/src/
 git clone git@github.com:amassiro/PlayWithDatacards.git
 git clone git@github.com:amassiro/ModificationDatacards.git
+cd PlayWithDatacards
 ```
 
-  - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd PlayWithDatacards```).
-  
-  - Activate Combine:
+- Activate Combine:
   ```
   cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/
   cmsenv
@@ -164,5 +161,5 @@ python   scripts/prepareTables2.py  |  /bin/sh
 ```
 python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
-to better debug, try to have only 1 signal sample, 1 background sample and data.
-From the error (that is a "combine" error) it seems you did not run on data.
+  to better debug, try to have only 1 signal sample, 1 background sample and data.
+  From the error (that is a "combine" error) it seems you did not run on data.
