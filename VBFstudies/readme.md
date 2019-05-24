@@ -137,8 +137,8 @@ Time to check and share the results: `https://username.web.cern.ch/username/*/ne
 /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_1_0/src/
 git clone git@github.com:amassiro/PlayWithDatacards.git
 git clone git@github.com:amassiro/ModificationDatacards.git
-
 ```
+
   - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd PlayWithDatacards```).
   
   - Activate Combine:
@@ -147,20 +147,22 @@ git clone git@github.com:amassiro/ModificationDatacards.git
   cmsenv
   cd -
   ```
+  
 - Modify the content for your analysis:
 ```
 cp scripts/prepareTable.py scripts/prepareTable2.py
 vim scripts/prepareTable2.py
 ```
+
 - Create table running (for a set of datacards):
 ```
 python   scripts/prepareTables2.py
 python   scripts/prepareTables2.py  |  /bin/sh
 ```
+
 - Or for a specific datacrd:
 ```
 python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
 to better debug, try to have only 1 signal sample, 1 background sample and data.
-
 From the error (that is a "combine" error) it seems you did not run on data.
