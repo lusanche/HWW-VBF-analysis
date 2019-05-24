@@ -1,4 +1,4 @@
-### Setup for 2017 data:
+## Configuration for 2017 data:
 
 ## 1. Setup Latinos framework
 
