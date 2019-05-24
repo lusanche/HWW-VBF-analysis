@@ -46,7 +46,7 @@ cmsenv
 scram b -j 10
 ```
 
-## 2. VBF analysis: Plots configuration for mkShapes, mkPlot, mkDatacards
+## 2. Plots configuration
 
 - Common tools for analysis
 ```
