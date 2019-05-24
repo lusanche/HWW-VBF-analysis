@@ -1,4 +1,4 @@
-## Configuration for 2017 data
+## VBF analysis for 2017 data
 
 - treeBaseDir: /eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/
 
@@ -11,33 +11,38 @@
 - Access your lxplus account: ```ssh -Y username@lxplus.cern.ch```
 - Login shell: ```bash -l```
 
-#### 1.1. Build the work area:
+#### 1.1. Setup a CMSSW release:
 - See installed projects available for platform and build work area
 ```
 scram list CMSSW
-export SCRAM_ARCH=slc6_amd64_gcc530
-cmsrel CMSSW_8_0_26_patch1
+export SCRAM_ARCH=slc6_amd64_gcc630
+cmsrel CMSSW_9_4_9
 ```
 - setup the runtime variable environment every time you start work in your project area
 ```
-cd CMSSW_8_0_26_patch1/src/
+cd CMSSW_9_4_9/src/
 cmsenv
 ```
 or ```eval `scramv1 runtime -sh` ```
 
 #### 1.2. Setup github repository:
 
-- Generate an [SSH key](https://help.github.com/articles/connecting-to-github-with-ssh/) and then initialize git locally
+- Get the latino main code
 ```
-git cms-init
-```
-- Clone the 'setup' repository of latinos github
-```
+cd $CMSSW_BASE/src/
 git clone --branch 13TeV git@github.com:latinos/setup.git LatinosSetup
+source LatinosSetup/SetupShapeOnly.sh
 ```
-- Setup 'Setup.sh' by sourcing (or ```bash```)
+- Get PlotsConfigurations
 ```
-source LatinosSetup/Setup.sh
+cd $CMSSW_BASE/src/
+git clone git@github.com:latinos/PlotsConfigurations.git
+```
+- Compile
+```
+cd $CMSSW_BASE/src/
+cmsenv
+scram b -j 10
 ```
 
 ## 2. VBF analysis: Plots configuration for mkShapes, mkPlot, mkDatacards
