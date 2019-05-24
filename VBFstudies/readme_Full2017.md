@@ -110,59 +110,9 @@ mkPlot.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
 mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
-## 3. To move or copy the plots to the web,
-```
-mkdir $HOME/www/*/new_directory
-pushd $HOME/www/*/new_directory
-wget https://raw.githubusercontent.com/latinos/PlotsConfigurations/master/index.php
-popd
-cp plotVBF/*png $HOME/www/new_directory/
-```
-Time to check and share the results: `https://username.web.cern.ch/username/*/new_directory/`
-
-## 4. Play with datacards:
-
-- Setup everything that is needed:
-
-  - Install the Higgs Combine Package with [ROOT6 SLC6 release CMSSW74X](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideHiggsAnalysisCombinedLimit#ROOT6_SLC6_release_CMSSW_7_4_X), necessary to use [SystematicsAnalyzer.py](https://github.com/latinos/PlayWithDatacards/blob/master/systematicsAnalyzer.py) (see line 49).
-  
-  - Clone some repositories (in CMSSW810):
-```
-git clone git@github.com:amassiro/PlayWithDatacards.git
-git clone git@github.com:amassiro/ModificationDatacards.git
-```
-  - Enter to [PlayWithDatacards](https://github.com/latinos/PlayWithDatacards) (```cd .../PlayWithDatacards```).
-  
-  - Activate Combine:
-  ```
-  cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/HiggsAnalysis/CombinedLimit
-  cmsenv
-  scramv1 b -j 20
-  cd -
-  ```
-- Modify the content for your analysis:
-```
-cp scripts/prepareTable.py scripts/prepareTable2.py
-vim scripts/prepareTable2.py
-```
-- Create table running (for a set of datacards):
-```
-python   scripts/prepareTables2.py
-python   scripts/prepareTables2.py  |  /bin/sh
-```
-- Or for a specific datacrd:
-```
-python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
-```
-to better debug, try to have only 1 signal sample, 1 background sample and data.
-
-From the error (that is a "combine" error) it seems you did not run on data.
-
-
+## 3. Combination of datacards
 
 - Make combination of datacards and workspaces by editing the script 'scripts/doCombination.sh' and running
 ```
 ./doCombination.sh
 ```
-
-
