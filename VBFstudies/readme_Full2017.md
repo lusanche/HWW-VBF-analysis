@@ -110,6 +110,32 @@ mkPlot.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
 mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
 ```
+
+## 3. Play with datacards:
+  
+- Enter:
+  ```
+  cd Latinos/CMSSW_8_1_0/src/PlayWithDatacards/
+  ```
+
+- Activate Combine:
+  ```
+  cd /afs/cern.ch/user/l/lusanche/Latnos/CMSSW_7_4_7/src/
+  cmsenv
+  cd -
+  ```
+  
+- Modify the content for your analysis:
+  ```
+  vim scripts/prepareTable2.py
+  ```
+
+- Create table running (for a set of datacards):
+  ```
+  python   scripts/prepareTables2.py
+  python   scripts/prepareTables2.py  |  /bin/sh
+  ```
+
 ## 3. Combination of datacards
 
 - Make combination of datacards and workspaces by editing the script 'scripts/doCombination.sh' and running
