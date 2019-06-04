@@ -157,7 +157,7 @@ python   scripts/prepareTables2.py
 python   scripts/prepareTables2.py  |  /bin/sh
 ```
 
-- Or for a specific datacrd:
+- Or for a specific datacard:
 ```
 python   systematicsAnalyzer.py    datacard.txt    --all   -m   125    -f    tex    >     output_datacard.tex
 ```
