@@ -115,7 +115,7 @@ mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
   
 - Enter:
   ```
-  cd Latinos/CMSSW_8_1_0/src/PlayWithDatacards/
+  cd /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_8_1_0/src/
   ```
 
 - Activate Combine:
