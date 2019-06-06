@@ -2,7 +2,8 @@
 treeName = 'Events'
  
 # ===== sub categories
-tag = 'lowmjj_detajj'
+tag = 'DYemb'
+#tag = 'lowmjj_detajj'
 #tag = 'lowmjj_nodetajj'
 #tag = 'highmjj_detajj'
 #tag = 'highmjj_nodetajj'
@@ -14,7 +15,8 @@ outputDir = 'rootFile_'+tag
 aliasesFile = 'aliases.py'
 variablesFile = 'variables.py'
 cutsFile = 'cuts.py'
-samplesFile = 'samples.py' 
+#samplesFile = 'samples.py'
+samplesFile = 'samples_embed.py'
 plotFile = 'plot.py' 
 
 # luminosity to normalize to (in 1/fb)
@@ -29,5 +31,5 @@ outputDirDatacard = 'datacards_'+tag
 structureFile = 'structure.py'
 
 # nuisances file for mkDatacards/mkShape
-nuisancesFile = 'nuisances.py'
-
+#nuisancesFile = 'nuisances.py'
+nuisancesFile = 'nuisances_embed.py'

@@ -1,6 +1,9 @@
 #aliases = {}
 
-mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
+if useEmbeddedDY:
+  mc = [skey for skey in samples if skey not in ('Fake', 'DATA', 'DY')]
+else:
+  mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
 
 bAlgo = 'DeepB'
 bWP = '0.1522'
@@ -40,7 +43,9 @@ systs = ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr1','c
 
 for s in systs:
   aliases['btagSF'+s+'up'] = { 'expr': 'bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_up_'+s) \
-                                     + '+btag2*'+aliases['btag2SF']['expr'].replace('shape','shape_up_'+s), 'samples':mc  }
+                                     + '+btag2*'+aliases['btag2SF']['expr'].replace('shape','shape_up_'+s) \
+                                     +' + ( (!bVeto) && (!btag2) )', 'samples':mc  }
   aliases['btagSF'+s+'down'] = { 'expr': 'bVeto*'+aliases['bVetoSF']['expr'].replace('shape','shape_down_'+s) \
-                                     + '+btag2*'+aliases['btag2SF']['expr'].replace('shape','shape_down_'+s), 'samples':mc }
+                                     + '+btag2*'+aliases['btag2SF']['expr'].replace('shape','shape_down_'+s) \
+                                     +' + ( (!bVeto) && (!btag2) )', 'samples':mc }
 

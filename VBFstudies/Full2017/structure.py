@@ -6,7 +6,7 @@
 #                    
 structure['DY']  = {  
                   'isSignal' : 0,
-                  'isData'   : 0
+                  'isData'   : 0,
               }
 
 structure['Wjets']  = {  
@@ -111,7 +111,7 @@ structure['qqH_hww'] = {
 
 structure['qqH_hww'] = {
                   'isSignal' : 1,
-                  'isData'   : 0    
+                  'isData'   : 0,
                   }
 
 structure['WH_hww'] = {

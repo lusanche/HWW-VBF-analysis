@@ -2,13 +2,13 @@
     
 #'fold' : # 0 = not fold (default), 1 = fold underflowbin, 2 = fold overflow bin, 3 = fold underflow and overflow
  
-variables['events']  = { 'name': '1',
-                         'range' : (1,0,2),  
-                         'xaxis' : 'events', 
-                         'fold' : 3
-                         }
+#variables['events']  = { 'name': '1',
+#                         'range' : (1,0,2),  
+#                         'xaxis' : 'events', 
+#                         'fold' : 3
+#                         }
 
-variables['mll_optim']  = { 'name': 'mll', 
+variables['mll']  = { 'name': 'mll', 
                             'range' : ([12,30,50,70,90,110,150,200],), # For VBF SR
                             'xaxis' : 'mll [GeV]', 
                             'fold' : 3,
@@ -30,13 +30,13 @@ variables['mll_optim']  = { 'name': 'mll',
 #                       }
 #
 #variables['mth_topcr']  = {  'name': 'mth',
-#                       'range': (40,0,200), 
+#                       'range': (20,0,200), 
 #                       'xaxis': 'mth [GeV]',
 #                       'fold': 0
 #                       }
 #
 #variables['mth_dycr']  = {  'name': 'mth',
-#                       'range': (10,0,60),
+#                       'range': (20,0,60),
 #                       'xaxis': 'mth [GeV]',
 #                       'fold': 0
 #                       }
