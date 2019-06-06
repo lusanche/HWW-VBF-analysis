@@ -147,8 +147,7 @@ if useEmbeddedDY:
                                  + getSampleFiles(directory2,'GluGluToWWToTNTN',False,'nanoLatino_') 
 
                                  + getSampleFiles(directory2,'Zg',False,'nanoLatino_') 
-                                 + getSampleFiles(directory ,'WZTo3LNu',False,'nanoLatino_')
-                                 #+ getSampleFiles(directory2,'WZTo3LNu_mllmin01',False,'nanoLatino_') 
+                                 + getSampleFiles(directory2,'WZTo3LNu_mllmin01',False,'nanoLatino_') 
 
                                  + getSampleFiles(directory2,'ZZTo2L2Nu',False,'nanoLatino_') 
                                  + getSampleFiles(directory2,'ZZTo2L2Q',False,'nanoLatino_') 
