@@ -34,7 +34,7 @@ groupPlot['DY']  = {
                   'nameHR' : "DY",
                   'isSignal' : 0,
                   'color': 418,    # kGreen+2
-                  'samples'  : ['DY']
+                  'samples'  : ['DY','DYveto']
               }
 
 groupPlot['VVV']  = {  
@@ -100,12 +100,20 @@ groupPlot['Higgs']  = {
 
 # keys here must match keys in samples.py    
 #                    
-plot['DY']  = {  
+plot['DY']  = {
                   'color': 418,    # kGreen+2
                   'isSignal' : 0,
-                  'isData'   : 0, 
-                  'scale'    : 1.0#*1.7986,
+                  'isData'   : 0,
+#                  'scale'    : 1.0#**(350/194.5934),# DY tautau
+                  'scale'    : 1.0*(350/(203.484+7.902)),# DY embedded
               }
+
+plot['DYveto']  = {
+                    'color': 418,    # kGreen+2
+                    'isSignal' : 0,
+                    'isData'   : 0,
+                    'scale'    : 1.0*(350/(203.484+7.902)),# DY embedded
+                  }
 
 plot['Fake']  = {  
                   'color': 921,    # kGray + 1
@@ -119,7 +127,7 @@ plot['top'] = {
                   'color': 400,   # kYellow
                   'isSignal' : 0,
                   'isData'   : 0, 
-                  'scale'    : 1.0#*1.1572,
+                  'scale'    : 1.0*(2740/2367.6772),
                   }
 
 plot['WW']  = {
