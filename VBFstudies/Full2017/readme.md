@@ -127,7 +127,7 @@ mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
   
 - Modify the content for your analysis:
   ```
-  vim scripts/prepareTable2.py
+  vim scripts/prepareTables2.py
   ```
 
 - Create table running (for a set of datacards):
