@@ -136,9 +136,23 @@ mkDatacards.py --pycfg=configuration.py --inputFile=rootFileTAG/plots_TAG.root
   python   scripts/prepareTables2.py  |  /bin/sh
   ```
 
-## 3. Combination of datacards
+## 3. Combine the datacards
 
 - Make combination of datacards and workspaces by editing the script 'scripts/doCombination.sh' and running
 ```
 ./doCombination.sh
+```
+
+## 4. Produce plots with signal relative contributions
+
+- Setup combine
+```
+cd /afs/cern.ch/user/l/lusanche/Latinos/CMSSW_7_4_7/src/
+cmsenv
+cd -
+```
+
+- Make the plot ()
+```
+./plotScripts/multiSignalStrengthPlot.py combination/combined2017_detajj_Higgs.txt --plotFile=plotScripts/plot.py
 ```
