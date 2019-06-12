@@ -154,5 +154,5 @@ cd -
 
 - Make the plot (The tdrstyle.py and CMS_lumi.py scripts are needed to get the CMS style plot)
 ```
-./plotScripts/multiSignalStrengthPlot.py --plotFile=plotScripts/plot.py combination/combined2017_detajj_Higgs.txt
+./plotScripts/multiSignalStrengthPlotVBF.py --plotFile=plotScripts/plot.py combination/combined2017_detajj_Higgs.txt
 ```
