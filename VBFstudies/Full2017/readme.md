@@ -94,7 +94,7 @@ mkShapesMulti.py --pycfg=configuration.py --doHadd=1  --batchSplit=Samples,Files
 
 - If this is too slow try to hadd manually
 ```
-cd rootFileTAG
+cd rootFile_TAG
 hadd -j 5 -f plots_TAG.root plots_TAG_ALL_*
 ```
 
